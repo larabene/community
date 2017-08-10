@@ -75,6 +75,10 @@
                     <img src="https://pbs.twimg.com/profile_images/740925098031472640/AMJ7VVKV_400x400.jpg" alt="user-img" title="Mat Helme" class="img-circle img-thumbnail img-responsive">
                 </div>
                 <h5><a href="{{ route('user.edit') }}">Joshua de Gier</a> </h5>
+                @if(!is_null(Auth::user()->profile))
+                <h6>{{ Auth::user()->profile->name }}</h6>
+                @endif
+
                 <ul class="list-inline">
                     <li>
                         <a href="{{ route('user.edit') }}" ><i class="zmdi zmdi-settings"></i></a>
