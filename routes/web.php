@@ -12,12 +12,25 @@
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('profiles.cards')->with([
+        'page_heading' => 'Bedrijvengids'
+    ]);
+});
+
+Route::get('/list', function () {
+    return view('profiles.table')->with([
+        'page_heading' => 'Bedrijvengids'
+    ]);
 });
 
 // User Profile Routes
 Route::group(['prefix' => 'profiel'], function() {
     Route::get('bewerken', ['as' => 'user.edit', 'uses' => 'MemberController@edit']);
+});
+
+// Profile Routes
+Route::group(['prefix' => 'gids'], function() {
+    Route::get('aanmaken', ['as' => 'profile.create', 'uses' => 'ProfileController@create']);
 });
 
 // Authentication Routes

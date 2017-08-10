@@ -59,6 +59,16 @@
                     </li>
                 </ul>
 
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden-xs">
+                        <form role="search" class="app-search">
+                            <input type="text" placeholder="Bedrijven zoeken..."
+                                   class="form-control">
+                            <a href=""><i class="fa fa-search"></i></a>
+                        </form>
+                    </li>
+                </ul>
+
             </div><!-- end container -->
         </div><!-- end navbar -->
     </div>
@@ -131,7 +141,15 @@
     </div>
     <!-- Left Sidebar End -->
 
-    @yield('content')
+    <div class="content-page">
+
+        @yield('content')
+
+        <footer class="footer">
+            &copy; {{ date("Y") }} - larabene.com
+        </footer>
+
+    </div>
 
 </div>
 <!-- END wrapper -->
