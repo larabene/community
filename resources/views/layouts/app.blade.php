@@ -104,16 +104,23 @@
             <!--- Sidemenu -->
             <div id="sidebar-menu">
                 <ul>
+                    <li class="text-muted menu-title">Bedrijvengids</li>
                     <li>
-                        <a href="index.html" class="waves-effect"><i class="fa fa-address-book-o" aria-hidden="true"></i> <span> Bedrijvengids </span> </a>
+                        <a href="{{ url('/') }}" class="waves-effect"><i class="fa fa-address-card-o" aria-hidden="true"></i> <span> Kaarten </span> </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/map') }}" class="waves-effect"><i class="fa fa-map-o" aria-hidden="true"></i> <span> Op de kaart </span> </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('/list') }}" class="waves-effect"><i class="fa fa-reorder" aria-hidden="true"></i> <span> Lijstweergave </span> </a>
                     </li>
 
+                    <li class="text-muted menu-title">Slack</li>
                     <li>
-                        <a href="typography.html" class="waves-effect"><i class="fa fa-map-o" aria-hidden="true"></i> <span> Op de kaart </span> </a>
+                        <a href="https://larabene.signup.team" target="_blank" class="waves-effect"><i class="fa fa-slack" aria-hidden="true"></i> <span> Invite Page </span> </a>
                     </li>
-
                     <li>
-                        <a href="typography.html" class="waves-effect"><i class="fa fa-slack" aria-hidden="true"></i> <span> Slack Channel </span> </a>
+                        <a href="https://larabene.slackarchive.io/general" target="_blank" class="waves-effect"><i class="fa fa-history" aria-hidden="true"></i> <span> SlackArchive.io </span></a>
                     </li>
 
                     <li class="text-muted menu-title">Gebruiker</li>
