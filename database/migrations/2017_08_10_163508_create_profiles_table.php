@@ -13,11 +13,13 @@ class CreateProfilesTable extends Migration
      */
     public function up()
     {
+        /**
+         * Profiles table
+         */
         Schema::create('profiles', function (Blueprint $table) {
             $table->increments('id');
-
-            // Belongs To a User
-            $table->integer('user_id')->unsigned();
+            $table->tinyInteger('highlight')->default(0);
+            $table->tinyInteger('available')->default(1);
 
             // Name and Address Fields
             $table->string('name');
@@ -25,6 +27,10 @@ class CreateProfilesTable extends Migration
             $table->string('zipcode');
             $table->string('city');
             $table->string('country');
+
+            // Coordinates for Google Maps
+            $table->string('coordinates_lat');
+            $table->string('coordinates_lng');
 
             // Contact Fields
             $table->string('emailaddress');
@@ -43,10 +49,21 @@ class CreateProfilesTable extends Migration
             $table->string('googleplus');
 
             // Other Fields
+            $table->decimal('hourly_rate');
             $table->string('logo');
             $table->date('founded_at');
 
+            // Timestamps
             $table->timestamps();
+        });
+
+        /**
+         * Pivot table Profile <-> User
+         */
+        Schema::create('profile_user', function(Blueprint $table) {
+            $table->integer('profile_id')->unsigned();
+            $table->integer('user_id')->unsigned();
+            $table->tinyInteger('primary')->default(0);
         });
     }
 
@@ -58,5 +75,6 @@ class CreateProfilesTable extends Migration
     public function down()
     {
         Schema::dropIfExists('profiles');
+        Schema::dropIfExists('profile_user');
     }
 }

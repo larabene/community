@@ -13,6 +13,9 @@ class CreateTagsTable extends Migration
      */
     public function up()
     {
+        /**
+         * Tags table
+         */
         Schema::create('tags', function (Blueprint $table) {
             $table->increments('id');
 
@@ -22,6 +25,9 @@ class CreateTagsTable extends Migration
             $table->timestamps();
         });
 
+        /**
+         * Pivot table Profile <-> Tag
+         */
         Schema::create('profile_tag', function(Blueprint $table) {
             $table->integer('profile_id')->unsigned();
             $table->integer('tag_id')->unsigned();
