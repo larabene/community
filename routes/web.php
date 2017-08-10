@@ -19,7 +19,13 @@ Route::get('/', function () {
 
 Route::get('/list', function () {
     return view('profiles.table')->with([
-        'page_heading' => 'Bedrijvengids'
+        'page_heading' => 'Bedrijven overzicht'
+    ]);
+});
+
+Route::get('/map', function () {
+    return view('profiles.map')->with([
+        'page_heading' => 'Op de kaart'
     ]);
 });
 
