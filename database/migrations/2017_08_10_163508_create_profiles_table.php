@@ -18,6 +18,7 @@ class CreateProfilesTable extends Migration
          */
         Schema::create('profiles', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('slug');
             $table->tinyInteger('active')->default(0);
             $table->tinyInteger('highlight')->default(0);
             $table->tinyInteger('available')->default(1);
