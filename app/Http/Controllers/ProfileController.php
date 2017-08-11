@@ -1,5 +1,7 @@
 <?php
 
+// Todo: Add logo upload
+
 namespace App\Http\Controllers;
 
 use Auth;
