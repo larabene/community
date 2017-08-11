@@ -56,7 +56,7 @@
                         </button>
                     </li>
                     <li>
-                        <h4 class="page-title">{{ $page_heading or '' }}</h4>
+                        @yield('page_heading')
                     </li>
                 </ul>
 
@@ -126,9 +126,12 @@
 
                     <li class="text-muted menu-title">Gebruiker</li>
                     @if(Auth::user())
-                    <li>
-                        <a href="{{ route('logout') }}" class="waves-effect"><i class="fa fa-sign-out" aria-hidden="true"></i> <span> Uitloggen</span> </a>
-                    </li>
+                        <li>
+                            <a href="{{ route('profile.list') }}" class="waves-effect"><i class="fa fa-building-o" aria-hidden="true"></i> <span> Uitloggen</span> </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('logout') }}" class="waves-effect"><i class="fa fa-sign-out" aria-hidden="true"></i> <span> Uitloggen</span> </a>
+                        </li>
                     @else
                         <li>
                             <a href="{{ route('login') }}" class="waves-effect"><i class="fa fa-sign-in" aria-hidden="true"></i> <span> Inloggen</span> </a>
