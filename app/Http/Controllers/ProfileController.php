@@ -2,11 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileRequest;
+use Auth;
 use App\Profile;
+use App\Http\Requests\ProfileRequest;
 
 class ProfileController extends Controller
 {
+    /**
+     * List the current users profiles
+     *
+     * @return $this
+     */
+    public function myProfiles()
+    {
+        return view('profiles.table')->with([
+            'profiles' => Auth::user()->profiles()
+        ]);
+    }
+
     /**
      * Create a profile
      *
@@ -27,9 +40,11 @@ class ProfileController extends Controller
      */
     public function store(ProfileRequest $request)
     {
-        Profile::create($request->all());
+        $profile = Profile::create($request->all());
 
-        flash('Het profiel is opgeslagen.');
+        Auth::user()->profiles()->attach($profile);
+
+        flash('Het profiel toegevoegd.');
 
         return redirect(route('profile.list'));
     }

@@ -24,37 +24,38 @@ class CreateProfilesTable extends Migration
 
             // Name and Address Fields
             $table->string('name');
-            $table->string('address')->nullabled();
-            $table->string('zipcode')->nullabled();
-            $table->string('city')->nullabled();
-            $table->string('country')->nullabled();
+            $table->string('address')->nullable();
+            $table->string('zipcode')->nullable();
+            $table->string('city')->nullable();
+            $table->string('country')->nullable();
 
             // Coordinates for Google Maps
-            $table->string('coordinates_lat')->nullabled();
-            $table->string('coordinates_lng')->nullabled();
+            $table->string('coordinates_lat')->nullable();
+            $table->string('coordinates_lng')->nullable();
 
             // Contact Fields
-            $table->string('website')->nullabled();
-            $table->string('emailaddress')->nullabled();
-            $table->string('telephone')->nullabled();
-            $table->string('mobile')->nullabled();
-            $table->string('whatsapp')->nullabled();
+            $table->string('website')->nullable();
+            $table->string('emailaddress')->nullable();
+            $table->string('telephone')->nullable();
+            $table->string('mobile')->nullable();
+            $table->string('whatsapp')->nullable();
 
             // Invoice Fields
-            $table->string('company_number')->nullabled();
-            $table->string('vat_number')->nullabled();
+            $table->string('company_number')->nullable();
+            $table->string('vat_number')->nullable();
 
             // Social Media Fields
-            $table->string('facebook')->nullabled();
-            $table->string('linkedin')->nullabled();
-            $table->string('twitter')->nullabled();
-            $table->string('googleplus')->nullabled();
+            $table->string('facebook')->nullable();
+            $table->string('linkedin')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('googleplus')->nullable();
 
             // Other Fields
-            $table->text('about')->nullabled();
-            $table->decimal('hourly_rate')->nullabled();
-            $table->string('logo')->nullabled();
-            $table->date('founded_at')->nullabled();
+            $table->string('intro')->nullable();
+            $table->text('about')->nullable();
+            $table->decimal('hourly_rate')->nullable();
+            $table->string('logo')->nullable();
+            $table->date('founded_at')->nullable();
 
             // Timestamps
             $table->timestamps();

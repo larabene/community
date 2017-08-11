@@ -39,56 +39,32 @@
                         </tr>
                         </thead>
                         <tbody>
+                        @foreach($profiles as $profile)
                         <tr>
-                            <th scope="row"><i class="fa fa-star" aria-hidden="true"></i></th>
-                            <td>Pendo</td>
-                            <td>Maastricht, Nederland</td>
-                            <td>043 - 302 00 01</td>
-                            <td>&euro; 65</td>
-                            <td><i class="fa fa-check" aria-hidden="true"></i></td>
-                            <td><i class="fa fa-envelope" aria-hidden="true"></i></td>
-                            <td></td>
+                            <th scope="row">
+                                @if($profile->highlight == 1)
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                @endif
+                            </th>
+                            <td>{{ $profile->name }}</td>
+                            <td>{{ $profile->city }} {{ $profile->country }}</td>
+                            <td>{{ $profile->telephone }}</td>
+                            <td>&euro; {{ $profile->hourly_rate }}</td>
+                            <td>
+                                @if($profile->available == 1)
+                                <i class="fa fa-check" aria-hidden="true"></i>
+                                @endif
+                            </td>
+                            <td>
+                                <a href="{{ route('profile.show', $profile->slug) }}">
+                                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                                </a>
+                            </td>
+                            <td>
+                                Edit knoppie
+                            </td>
                         </tr>
-                        <tr>
-                            <th scope="row"></th>
-                            <td>Spatie</td>
-                            <td>Antwerpen, Belgi&euml;</td>
-                            <td>+32 (0)82 743 92 73</td>
-                            <td>&euro; 80</td>
-                            <td><i class="fa fa-check" aria-hidden="true"></i></td>
-                            <td><i class="fa fa-envelope" aria-hidden="true"></i></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th scope="row"></th>
-                            <td>Google</td>
-                            <td>Amsterdam, Nederland</td>
-                            <td>010 - 927 28 39</td>
-                            <td>&euro; 175</td>
-                            <td><i class="fa fa-times" aria-hidden="true"></i></td>
-                            <td><i class="fa fa-envelope" aria-hidden="true"></i></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th scope="row"><i class="fa fa-star" aria-hidden="true"></i></th>
-                            <td>Roj BV</td>
-                            <td>Berlijn, Duitsland</td>
-                            <td>0180 - 937 83 182</td>
-                            <td>&euro; 50</td>
-                            <td><i class="fa fa-times" aria-hidden="true"></i></td>
-                            <td><i class="fa fa-envelope" aria-hidden="true"></i></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <th scope="row"></th>
-                            <td>Microsoft</td>
-                            <td>Rotterdam, Nederland</td>
-                            <td>030 - 123 45 67</td>
-                            <td>&euro; 62,50</td>
-                            <td><i class="fa fa-times" aria-hidden="true"></i></td>
-                            <td><i class="fa fa-envelope" aria-hidden="true"></i></td>
-                            <td></td>
-                        </tr>
+                        @endforeach
                         </tbody>
                     </table>
 

@@ -36,7 +36,7 @@ Route::group(['prefix' => 'profiel'], function() {
 
 // Profile Routes
 Route::group(['prefix' => 'gids'], function() {
-    Route::get('mijn-profielen', ['as' => 'profile.list', 'uses' => 'ProfileController@list', 'middleware' => ['auth']]);
+    Route::get('mijn-profielen', ['as' => 'profile.list', 'uses' => 'ProfileController@myProfiles', 'middleware' => ['auth']]);
     Route::get('nieuw', ['as' => 'profile.create', 'uses' => 'ProfileController@create']);
     Route::post('nieuw', ['as' => 'profile.store', 'uses' => 'ProfileController@store']);
 });

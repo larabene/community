@@ -156,3 +156,26 @@
 
     </div>
 </div>
+
+<hr />
+
+<h4 class="header-title m-t-0 m-b-30">Over het bedrijf</h4>
+
+<div class="row">
+    <div class="col-lg-12">
+
+        <div class="form-group{{ $errors->has('intro') ? ' has-error' : '' }}">
+            <div class="col-md-12">
+                <input type="text" class="form-control" name="intro" value="{{ old('intro', $profile->intro) }}" placeholder="Introductie (+- 2 regels)" />
+            </div>
+        </div>
+
+        <div class="form-group{{ $errors->has('about') ? ' has-error' : '' }}">
+            <div class="col-md-12">
+                <textarea class="form-control" rows="10" name="about" placeholder="Vrij tekstveld over het bedrijf">{{ old('about', $profile->about) }}</textarea>
+                <span class="help-block"><small>Markdown toegestaan</small></span>
+            </div>
+        </div>
+
+    </div>
+</div>
