@@ -4,6 +4,8 @@
     <div class="content">
         <div class="container">
 
+            @include('flash::message')
+
             <div class="row">
                 <div class="col-sm-4">
                     <button type="button" class="btn btn-primary btn-rounded w-md waves-effect waves-light m-b-20">
@@ -33,6 +35,7 @@
                             <th>Uurtarief</th>
                             <th>Beschikbaar</th>
                             <th>Contact</th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -44,6 +47,7 @@
                             <td>&euro; 65</td>
                             <td><i class="fa fa-check" aria-hidden="true"></i></td>
                             <td><i class="fa fa-envelope" aria-hidden="true"></i></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <th scope="row"></th>
@@ -53,6 +57,7 @@
                             <td>&euro; 80</td>
                             <td><i class="fa fa-check" aria-hidden="true"></i></td>
                             <td><i class="fa fa-envelope" aria-hidden="true"></i></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <th scope="row"></th>
@@ -62,6 +67,7 @@
                             <td>&euro; 175</td>
                             <td><i class="fa fa-times" aria-hidden="true"></i></td>
                             <td><i class="fa fa-envelope" aria-hidden="true"></i></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <th scope="row"><i class="fa fa-star" aria-hidden="true"></i></th>
@@ -71,6 +77,7 @@
                             <td>&euro; 50</td>
                             <td><i class="fa fa-times" aria-hidden="true"></i></td>
                             <td><i class="fa fa-envelope" aria-hidden="true"></i></td>
+                            <td></td>
                         </tr>
                         <tr>
                             <th scope="row"></th>
@@ -80,6 +87,7 @@
                             <td>&euro; 62,50</td>
                             <td><i class="fa fa-times" aria-hidden="true"></i></td>
                             <td><i class="fa fa-envelope" aria-hidden="true"></i></td>
+                            <td></td>
                         </tr>
                         </tbody>
                     </table>

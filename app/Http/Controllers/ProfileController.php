@@ -14,7 +14,9 @@ class ProfileController extends Controller
      */
     public function create()
     {
-        return view('profiles.manage.create');
+        $profile = new Profile();
+
+        return view('profiles.manage.create')->with(['profile' => $profile]);
     }
 
     /**
@@ -25,11 +27,9 @@ class ProfileController extends Controller
      */
     public function store(ProfileRequest $request)
     {
-        $input = $request->all();
+        Profile::create($request->all());
 
-        Profile::create($input);
-
-        Flash::success('Het profiel is opgeslagen.');
+        flash('Het profiel is opgeslagen.');
 
         return redirect(route('profile.list'));
     }
