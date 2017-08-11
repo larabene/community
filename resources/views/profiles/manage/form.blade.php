@@ -47,6 +47,12 @@
 <div class="row">
     <div class="col-lg-12">
 
+        <div class="form-group{{ $errors->has('website') ? ' has-error' : '' }}">
+            <div class="col-md-12">
+                <input type="text" class="form-control" name="website" value="{{ old('website', $profile->website) }}" placeholder="Website" />
+            </div>
+        </div>
+
         <div class="form-group{{ $errors->has('emailaddress') ? ' has-error' : '' }}">
             <div class="col-md-12">
                 <input type="text" class="form-control" name="emailaddress" value="{{ old('emailaddress', $profile->emailaddress) }}" placeholder="E-mailadres" />
@@ -74,6 +80,7 @@
         <div class="form-group{{ $errors->has('coordinates_lat') || $errors->has('coordinates_lng') ? ' has-error' : '' }}">
             <div class="col-md-6">
                 <input type="text" class="form-control" name="coordinates_lat" value="{{ old('coordinates_lat', $profile->coordinates_lat) }}" placeholder="Coordinaat Lat" />
+                <span class="help-block"><small><a href="http://www.latlong.net/convert-address-to-lat-long.html" target="_blank">Lat/lng tool</a></small></span>
             </div>
             <div class="col-md-6">
                 <input type="text" class="form-control" name="coordinates_lng" value="{{ old('coordinates_lng', $profile->coordinates_lng) }}" placeholder="Coordinaat Lng" />

@@ -1,48 +1,29 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-Route::get('/', function () {
-    return view('profiles.cards')->with([
-        'page_heading' => 'Bedrijvengids'
-    ]);
+Route::get('/', function() {
+    return redirect()->route('guide');
 });
 
-Route::get('/list', function () {
-    return view('profiles.table')->with([
-        'page_heading' => 'Bedrijven overzicht'
-    ]);
-});
-
-Route::get('/map', function () {
-    return view('profiles.map')->with([
-        'page_heading' => 'Op de kaart'
-    ]);
-});
-
-// User Profile Routes
-Route::group(['prefix' => 'profiel'], function() {
-    Route::get('bewerken', ['as' => 'user.edit', 'uses' => 'MemberController@edit']);
-});
-
-// Profile Routes
+// Profile Guide Routes
 Route::group(['prefix' => 'gids'], function() {
+    // Different views
+    Route::get('/', ['as' => 'guide', 'uses' => 'ProfileController@index']);
+    Route::get('/lijst', ['as' => 'guide.list', 'uses' => 'ProfileController@index']);
+    Route::get('/op-de-kaart', ['as' => 'guide.map', 'uses' => 'ProfileController@index']);
+
     Route::get('mijn-profielen', ['as' => 'profile.list', 'uses' => 'ProfileController@myProfiles', 'middleware' => ['auth']]);
     Route::get('nieuw', ['as' => 'profile.create', 'uses' => 'ProfileController@create']);
+    Route::get('{profile}', ['as' => 'profile.show', 'uses' => 'ProfileController@show']);
+    Route::get('{profile}/bewerken', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
+
     Route::post('nieuw', ['as' => 'profile.store', 'uses' => 'ProfileController@store']);
 });
 
 // Authentication Routes
 Route::group(['prefix' => 'gebruiker'], function() {
+    // Profile
+    Route::get('bewerken', ['as' => 'user.edit', 'uses' => 'MemberController@edit']);
+
     // Login and Logout Routes...
     Route::get('inloggen', 'Auth\LoginController@showLoginForm')->name('login');
     Route::post('inloggen', 'Auth\LoginController@login');

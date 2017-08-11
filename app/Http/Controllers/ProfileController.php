@@ -3,25 +3,55 @@
 namespace App\Http\Controllers;
 
 use Auth;
+use Route;
 use App\Profile;
 use App\Http\Requests\ProfileRequest;
 
 class ProfileController extends Controller
 {
     /**
-     * List the current users profiles
+     * Get the index of all profiles.
+     *
+     * @return $this
+     */
+    public function index()
+    {
+        $view = $this->getCurrentListType();
+
+        return view('profiles.' . $view)->with([
+            'profiles' => Profile::paginate(16)
+        ]);
+    }
+
+    /**
+     * Get the current list type to determine the view.
+     *
+     * @return string
+     */
+    private function getCurrentListType()
+    {
+        switch(Route::currentRouteName())
+        {
+            case 'guide':return 'cards';break;
+            case 'guide.map':return 'map';break;
+            case 'guide.list':return 'table';break;
+        }
+    }
+
+    /**
+     * List the current users profiles.
      *
      * @return $this
      */
     public function myProfiles()
     {
         return view('profiles.table')->with([
-            'profiles' => Auth::user()->profiles()
+            'profiles' => Auth::user()->profiles
         ]);
     }
 
     /**
-     * Create a profile
+     * Create a profile.
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -33,7 +63,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * Save a profile to the database
+     * Save a profile to the database.
      *
      * @param ProfileRequest $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector

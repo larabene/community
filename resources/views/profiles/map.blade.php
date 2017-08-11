@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('page_heading')
+    <h4 class="page-title">Op de kaart</h4>
+@endsection
+
 @section('content')
     <div class="content">
         <div class="container">

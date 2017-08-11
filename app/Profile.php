@@ -33,6 +33,31 @@ class Profile extends Model
     }
 
     /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+    /**
+     * Format the hourly_rate attribute
+     *
+     * @param $value
+     * @return string
+     */
+    public function getHourlyRateAttribute($value)
+    {
+        if(is_null($value) || $value == 0) {
+            return '?';
+        } else {
+            return format_valuta($value);
+        }
+    }
+
+    /**
      * User relation.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

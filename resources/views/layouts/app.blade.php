@@ -107,13 +107,13 @@
                 <ul>
                     <li class="text-muted menu-title">Bedrijvengids</li>
                     <li>
-                        <a href="{{ url('/') }}" class="waves-effect"><i class="fa fa-address-card-o" aria-hidden="true"></i> <span> Kaarten </span> </a>
+                        <a href="{{ route('guide') }}" class="waves-effect"><i class="fa fa-address-card-o" aria-hidden="true"></i> <span> Kaarten </span> </a>
                     </li>
                     <li>
-                        <a href="{{ url('/map') }}" class="waves-effect"><i class="fa fa-map-o" aria-hidden="true"></i> <span> Op de kaart </span> </a>
+                        <a href="{{ route('guide.map') }}" class="waves-effect"><i class="fa fa-map-o" aria-hidden="true"></i> <span> Op de kaart </span> </a>
                     </li>
                     <li>
-                        <a href="{{ url('/list') }}" class="waves-effect"><i class="fa fa-reorder" aria-hidden="true"></i> <span> Lijstweergave </span> </a>
+                        <a href="{{ route('guide.list') }}" class="waves-effect"><i class="fa fa-reorder" aria-hidden="true"></i> <span> Lijstweergave </span> </a>
                     </li>
 
                     <li class="text-muted menu-title">Slack</li>
@@ -127,7 +127,7 @@
                     <li class="text-muted menu-title">Gebruiker</li>
                     @if(Auth::user())
                         <li>
-                            <a href="{{ route('profile.list') }}" class="waves-effect"><i class="fa fa-building-o" aria-hidden="true"></i> <span> Uitloggen</span> </a>
+                            <a href="{{ route('profile.list') }}" class="waves-effect"><i class="fa fa-building-o" aria-hidden="true"></i> <span> Mijn bedrijven</span> </a>
                         </li>
                         <li>
                             <a href="{{ route('logout') }}" class="waves-effect"><i class="fa fa-sign-out" aria-hidden="true"></i> <span> Uitloggen</span> </a>

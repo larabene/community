@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@section('page_heading')
+    @if(Route::currentRouteName() == "profile.list")
+        <h4 class="page-title">Mijn bedrijven</h4>
+    @else
+        <h4 class="page-title">Bedrijvengids</h4>
+    @endif
+@endsection
+
 @section('content')
     <div class="content">
         <div class="container">
@@ -8,9 +16,9 @@
 
             <div class="row">
                 <div class="col-sm-4">
-                    <button type="button" class="btn btn-primary btn-rounded w-md waves-effect waves-light m-b-20">
+                    <a href="{{ route('profile.create') }}" class="btn btn-primary btn-rounded w-md waves-effect waves-light m-b-20">
                         Bedrijf toevoegen
-                    </button>
+                    </a>
                 </div>
                 <div class="col-sm-8">
                     <div class="project-sort pull-right">
@@ -34,7 +42,6 @@
                             <th>Telefoon</th>
                             <th>Uurtarief</th>
                             <th>Beschikbaar</th>
-                            <th>Contact</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -46,7 +53,9 @@
                                 <i class="fa fa-star" aria-hidden="true"></i>
                                 @endif
                             </th>
-                            <td>{{ $profile->name }}</td>
+                            <td>
+                                <a href="{{ route('profile.show', $profile->slug) }}">{{ $profile->name }}</a>
+                            </td>
                             <td>{{ $profile->city }} {{ $profile->country }}</td>
                             <td>{{ $profile->telephone }}</td>
                             <td>&euro; {{ $profile->hourly_rate }}</td>
@@ -56,12 +65,9 @@
                                 @endif
                             </td>
                             <td>
-                                <a href="{{ route('profile.show', $profile->slug) }}">
-                                    <i class="fa fa-envelope" aria-hidden="true"></i>
-                                </a>
-                            </td>
-                            <td>
-                                Edit knoppie
+                                @if(Auth::user()->profiles->contains($profile))
+                                    <a href="{{ route('profile.edit', $profile->slug) }}" class="btn btn-icon waves-effect waves-light btn-primary btn-xs"> <i class="fa fa-pencil"></i> </a>
+                                @endif
                             </td>
                         </tr>
                         @endforeach
