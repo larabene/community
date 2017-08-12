@@ -38,6 +38,17 @@ class ProfileController extends Controller
     }
 
     /**
+     * Display a company profile.
+     *
+     * @param Profile $profile
+     * @return $this
+     */
+    public function show(Profile $profile)
+    {
+        return view('profiles.show')->with(['profile' => $profile]);
+    }
+
+    /**
      * Returns the (paginated) list of profiles based on the current route.
      *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator|\Illuminate\Database\Eloquent\Collection|static[]
@@ -170,7 +181,7 @@ class ProfileController extends Controller
     {
         if(file_exists(storage_path('app/public/uploads/logos/' . $profile->logo)) && $profile->logo != "") {
             File::delete(storage_path('app/public/uploads/articles/' . $profile->logo));
-            $profile->image = '';
+            $profile->logo = null;
             $profile->save();
 
             flash('Het logo is verwijderd.');
