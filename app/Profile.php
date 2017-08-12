@@ -4,10 +4,12 @@ namespace App;
 
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
+use App\ModelFilters\ProfileFilter;
+use EloquentFilter\Filterable;
 
 class Profile extends Model
 {
-    use Sluggable;
+    use Sluggable, Filterable;
 
     protected $dates = ['founded_at' ,'created_at', 'updated_at'];
 
@@ -40,6 +42,16 @@ class Profile extends Model
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    /**
+     * Return the ModelFilter for Profile
+     *
+     * @return \EloquentFilter\ModelFilter
+     */
+    public function modelFilter()
+    {
+        return $this->provideFilter(ProfileFilter::class);
     }
 
     /**

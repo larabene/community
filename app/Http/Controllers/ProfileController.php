@@ -57,9 +57,9 @@ class ProfileController extends Controller
     {
         switch(Route::currentRouteName())
         {
-            case 'guide':return Profile::paginate(16);break;
-            case 'guide.map':return Profile::all();break;
-            case 'guide.list':return Profile::paginate(25);break;
+            case 'guide':return Profile::filter(request()->all())->paginateFilter(16);break;
+            case 'guide.map':return Profile::filter(request()->all())->all();break;
+            case 'guide.list':return Profile::filter(request()->all())->paginateFilter(25);break;
         }
     }
 
