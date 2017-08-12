@@ -36,4 +36,18 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Profile::class);
     }
+
+    /**
+     * Returns the primary profile.
+     *
+     * @return null
+     */
+    public function primaryProfile()
+    {
+        if(\Auth::check()) {
+            return \Auth::user()->profiles()->where('primary', 1)->first();
+        }
+
+        return null;
+    }
 }

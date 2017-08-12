@@ -82,12 +82,15 @@
 
             @if(Auth::user())
             <div class="user-box">
+                @if(!is_null(Auth::user()->primaryProfile()) && !is_null(Auth::user()->primaryProfile()->logo))
                 <div class="user-img">
-                    <img src="https://pbs.twimg.com/profile_images/740925098031472640/AMJ7VVKV_400x400.jpg" alt="user-img" title="Mat Helme" class="img-circle img-thumbnail img-responsive">
+                    <img src="{{ asset('uploads/logos/' . Auth::user()->primaryProfile()->logo) }}" alt="user-img" title="Mat Helme" class="img-circle img-thumbnail img-responsive">
                 </div>
+                @endif
+
                 <h5><a href="{{ route('user.edit') }}">Joshua de Gier</a> </h5>
-                @if(!is_null(Auth::user()->profile))
-                <h6>{{ Auth::user()->profile->name }}</h6>
+                @if(!is_null(Auth::user()->primaryProfile()))
+                <h6>{{ Auth::user()->primaryProfile()->name }}</h6>
                 @endif
 
                 <ul class="list-inline">
