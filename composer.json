@@ -9,9 +9,11 @@
         "andreasindal/laravel-markdown": "^1.1",
         "cviebrock/eloquent-sluggable": "^4.2",
         "intervention/image": "^2.4",
+        "jedrzej/sortable": "^0.0.9",
         "laracasts/flash": "^3.0",
         "laravel/framework": "5.4.*",
-        "laravel/tinker": "~1.0"
+        "laravel/tinker": "~1.0",
+        "tucker-eric/eloquentfilter": "^1.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
