@@ -84,7 +84,9 @@
             <div class="user-box">
                 @if(!is_null(Auth::user()->primaryProfile()) && !is_null(Auth::user()->primaryProfile()->logo))
                 <div class="user-img">
-                    <img src="{{ asset('uploads/logos/' . Auth::user()->primaryProfile()->logo) }}" alt="user-img" title="Mat Helme" class="img-circle img-thumbnail img-responsive">
+                    <a href="{{ route('profile.show', [Auth::user()->primaryProfile()->slug]) }}">
+                        <img src="{{ asset('uploads/logos/' . Auth::user()->primaryProfile()->logo) }}" alt="user-img" title="{{ Auth::user()->primaryProfile()->name }}" class="img-circle img-thumbnail img-responsive">
+                    </a>
                 </div>
                 @endif
 
