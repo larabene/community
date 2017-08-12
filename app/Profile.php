@@ -4,13 +4,19 @@ namespace App;
 
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
+use Jedrzej\Sortable\SortableTrait;
 use App\ModelFilters\ProfileFilter;
 use EloquentFilter\Filterable;
 
 class Profile extends Model
 {
-    use Sluggable, Filterable;
+    use Sluggable, Filterable, SortableTrait;
 
+    /**
+     * Date Fields.
+     *
+     * @var array
+     */
     protected $dates = ['founded_at' ,'created_at', 'updated_at'];
 
     /**
@@ -19,6 +25,13 @@ class Profile extends Model
      * @var array
      */
     protected $guarded = [];
+
+    /**
+     * Parameter key to listen for sorting.
+     *
+     * @var string
+     */
+    protected $sortParameterName = 'sorteer';
 
     /**
      * Return the sluggable configuration array for this model.
@@ -52,6 +65,16 @@ class Profile extends Model
     public function modelFilter()
     {
         return $this->provideFilter(ProfileFilter::class);
+    }
+
+    /**
+     * Return the list of sortable fields
+     *
+     * @return array
+     */
+    public function getSortableAttributes()
+    {
+        return ['name', 'city', 'country', 'highlight'];
     }
 
     /**
