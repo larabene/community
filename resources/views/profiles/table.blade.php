@@ -23,8 +23,7 @@
                 <div class="col-sm-8">
                     <div class="project-sort pull-right">
                         <div class="project-sort-item">
-                            <i class="fa fa-th-large" aria-hidden="true" style="font-size: 2em;"></i>
-                            <i class="fa fa-th-list" aria-hidden="true" style="font-size: 2em;"></i>
+                            <!-- Nothing so far -->
                         </div>
                     </div>
                 </div>
