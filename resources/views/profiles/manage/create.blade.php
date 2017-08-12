@@ -11,7 +11,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card-box">
-                        <form class="form-horizontal" method="post" action="{{ route('profile.store') }}">
+                        <form class="form-horizontal" method="post" action="{{ route('profile.store') }}" enctype="multipart/form-data">
                             {{ csrf_field() }}
 
                             @include('profiles.manage.form')
