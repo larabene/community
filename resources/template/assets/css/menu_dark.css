@@ -13,7 +13,7 @@ File: Menu
 }
 .topbar .topbar-left {
   background: #ffffff;
-  border-top: 3px solid #71b6f9;
+  border-top: 3px solid #f4645f;
   float: left;
   text-align: center;
   height: 73px;
@@ -28,7 +28,7 @@ File: Menu
   background-color: #ffffff;
   border-radius: 0px;
   border: none;
-  border-top: 3px solid #71b6f9;
+  border-top: 3px solid #f4645f;
   margin-bottom: 0px;
   padding: 0px 20px;
   box-shadow: 0 0px 24px 0 rgba(0, 0, 0, 0.06), 0 1px 0px 0 rgba(0, 0, 0, 0.02);
@@ -43,7 +43,7 @@ File: Menu
   display: none;
 }
 .logo {
-  color: #188ae2 !important;
+  color: #f4645f !important;
   font-size: 32px;
   font-family: 'Rancho', cursive;
 }
@@ -51,7 +51,7 @@ File: Menu
   display: none;
 }
 .logo span span {
-  color: #10c469;
+  color: #d22e28;
 }
 .user-box {
   text-align: center;
@@ -83,7 +83,7 @@ File: Menu
   color: #ff5b5b;
 }
 .user-box .user-status.online i {
-  color: #10c469;
+  color: #d22e28;
 }
 .user-box .user-status.busy i {
   color: #98a6ad;
@@ -92,7 +92,7 @@ File: Menu
   color: #98a6ad;
 }
 .user-box ul li a:hover {
-  color: #71b6f9;
+  color: #f4645f;
 }
 .notification-box ul {
   max-height: 60px;
@@ -215,7 +215,7 @@ File: Menu
   line-height: 68px;
 }
 .button-menu-mobile:hover {
-  color: #71b6f9;
+  color: #f4645f;
 }
 .sidebar-inner {
   height: 100%;
@@ -274,7 +274,7 @@ File: Menu
   border-top: 0;
 }
 #sidebar-menu ul ul li.active a {
-  color: #71b6f9;
+  color: #f4645f;
 }
 #sidebar-menu ul ul a {
   color: #838F9A;
@@ -300,8 +300,8 @@ File: Menu
   margin-top: 2px;
 }
 #sidebar-menu .subdrop {
-  border-left: 3px solid #71b6f9;
-  color: #71b6f9 !important;
+  border-left: 3px solid #f4645f;
+  color: #f4645f !important;
 }
 #sidebar-menu > ul > li > a {
   color: #838F9A;
@@ -311,7 +311,7 @@ File: Menu
   border-left: 3px solid transparent;
 }
 #sidebar-menu > ul > li > a:hover {
-  color: #71b6f9;
+  color: #f4645f;
   text-decoration: none;
 }
 #sidebar-menu > ul > li > a > span {
@@ -337,8 +337,8 @@ File: Menu
   margin-right: 0px;
 }
 #sidebar-menu > ul > li > a.active {
-  border-left: 3px solid #71b6f9;
-  color: #71b6f9 !important;
+  border-left: 3px solid #f4645f;
+  color: #f4645f !important;
 }
 .menu-title {
   padding: 12px 20px !important;
@@ -402,7 +402,7 @@ File: Menu
   position: relative;
   width: 260px;
   background: #272c35;
-  color: #71b6f9;
+  color: #f4645f;
   border-color: transparent;
 }
 #wrapper.enlarged .left.side-menu #sidebar-menu ul > li:hover > ul {
@@ -420,7 +420,7 @@ File: Menu
   z-index: 6;
 }
 #wrapper.enlarged .left.side-menu #sidebar-menu ul > li:hover > ul a:hover {
-  color: #71b6f9;
+  color: #f4645f;
 }
 #wrapper.enlarged .left.side-menu #sidebar-menu ul > li:hover a span {
   display: inline;
@@ -440,10 +440,10 @@ File: Menu
   z-index: 6;
 }
 #wrapper.enlarged .left.side-menu #sidebar-menu li .show-menu + ul a:hover {
-  color: #71b6f9;
+  color: #f4645f;
 }
 #wrapper.enlarged .left.side-menu #sidebar-menu a.subdrop {
-  color: #71b6f9 !important;
+  color: #f4645f !important;
 }
 #wrapper.enlarged .left.side-menu #sidebar-menu ul > li > ul {
   display: none;
@@ -464,7 +464,7 @@ File: Menu
   transform: rotate(270deg);
 }
 #wrapper.enlarged .left.side-menu #sidebar-menu ul ul li.active a {
-  color: #71b6f9;
+  color: #f4645f;
 }
 #wrapper.enlarged .left.side-menu #sidebar-menu ul > li > a span {
   display: none;
@@ -596,7 +596,7 @@ File: Menu
 }
 .user-list .user-list-item .user-desc span.time {
   font-size: 11px;
-  color: #71b6f9;
+  color: #f4645f;
   font-style: italic;
 }
 /* Seach */

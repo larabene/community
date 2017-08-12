@@ -19,6 +19,7 @@
     <link href="assets/css/menu.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/responsive.css" rel="stylesheet" type="text/css" />
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    @yield('styles')
 
     <!-- HTML5 Shiv and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -55,7 +56,17 @@
                         </button>
                     </li>
                     <li>
-                        <h4 class="page-title">{{ $page_heading or '' }}</h4>
+                        @yield('page_heading')
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden-xs">
+                        <form role="search" class="app-search">
+                            <input type="text" placeholder="Bedrijven zoeken..."
+                                   class="form-control">
+                            <a href=""><i class="fa fa-search"></i></a>
+                        </form>
                     </li>
                 </ul>
 
@@ -71,10 +82,17 @@
 
             @if(Auth::user())
             <div class="user-box">
+                @if(!is_null(Auth::user()->primaryProfile()) && !is_null(Auth::user()->primaryProfile()->logo))
                 <div class="user-img">
-                    <img src="https://pbs.twimg.com/profile_images/740925098031472640/AMJ7VVKV_400x400.jpg" alt="user-img" title="Mat Helme" class="img-circle img-thumbnail img-responsive">
+                    <img src="{{ asset('uploads/logos/' . Auth::user()->primaryProfile()->logo) }}" alt="user-img" title="Mat Helme" class="img-circle img-thumbnail img-responsive">
                 </div>
+                @endif
+
                 <h5><a href="{{ route('user.edit') }}">Joshua de Gier</a> </h5>
+                @if(!is_null(Auth::user()->primaryProfile()))
+                <h6>{{ Auth::user()->primaryProfile()->name }}</h6>
+                @endif
+
                 <ul class="list-inline">
                     <li>
                         <a href="{{ route('user.edit') }}" ><i class="zmdi zmdi-settings"></i></a>
@@ -90,23 +108,33 @@
             <!--- Sidemenu -->
             <div id="sidebar-menu">
                 <ul>
+                    <li class="text-muted menu-title">Bedrijvengids</li>
                     <li>
-                        <a href="index.html" class="waves-effect"><i class="fa fa-address-book-o" aria-hidden="true"></i> <span> Bedrijvengids </span> </a>
+                        <a href="{{ route('guide') }}" class="waves-effect"><i class="fa fa-address-card-o" aria-hidden="true"></i> <span> Kaarten </span> </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('guide.map') }}" class="waves-effect"><i class="fa fa-map-o" aria-hidden="true"></i> <span> Op de kaart </span> </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('guide.list') }}" class="waves-effect"><i class="fa fa-reorder" aria-hidden="true"></i> <span> Lijstweergave </span> </a>
                     </li>
 
+                    <li class="text-muted menu-title">Slack</li>
                     <li>
-                        <a href="typography.html" class="waves-effect"><i class="fa fa-map-o" aria-hidden="true"></i> <span> Op de kaart </span> </a>
+                        <a href="https://larabene.signup.team" target="_blank" class="waves-effect"><i class="fa fa-slack" aria-hidden="true"></i> <span> Invite Page </span> </a>
                     </li>
-
                     <li>
-                        <a href="typography.html" class="waves-effect"><i class="fa fa-slack" aria-hidden="true"></i> <span> Slack Channel </span> </a>
+                        <a href="https://larabene.slackarchive.io/general" target="_blank" class="waves-effect"><i class="fa fa-history" aria-hidden="true"></i> <span> SlackArchive.io </span></a>
                     </li>
 
                     <li class="text-muted menu-title">Gebruiker</li>
                     @if(Auth::user())
-                    <li>
-                        <a href="{{ route('logout') }}" class="waves-effect"><i class="fa fa-sign-out" aria-hidden="true"></i> <span> Uitloggen</span> </a>
-                    </li>
+                        <li>
+                            <a href="{{ route('profile.list') }}" class="waves-effect"><i class="fa fa-building-o" aria-hidden="true"></i> <span> Mijn bedrijven</span> </a>
+                        </li>
+                        <li>
+                            <a href="{{ route('logout') }}" class="waves-effect"><i class="fa fa-sign-out" aria-hidden="true"></i> <span> Uitloggen</span> </a>
+                        </li>
                     @else
                         <li>
                             <a href="{{ route('login') }}" class="waves-effect"><i class="fa fa-sign-in" aria-hidden="true"></i> <span> Inloggen</span> </a>
@@ -127,7 +155,15 @@
     </div>
     <!-- Left Sidebar End -->
 
-    @yield('content')
+    <div class="content-page">
+
+        @yield('content')
+
+        <footer class="footer">
+            &copy; {{ date("Y") }} - larabene.com
+        </footer>
+
+    </div>
 
 </div>
 <!-- END wrapper -->
@@ -152,6 +188,7 @@
 <!-- App js -->
 <script src="assets/js/jquery.core.js"></script>
 <script src="assets/js/jquery.app.js"></script>
+@yield('scripts')
 
 </body>
 </html>
