@@ -65,7 +65,7 @@
                                 @endif
                             </td>
                             <td>
-                                @if(Auth::user()->profiles->contains($profile))
+                                @if(Auth::check() && Auth::user()->profiles->contains($profile))
                                     <a href="{{ route('profile.edit', $profile->slug) }}" class="btn btn-icon waves-effect waves-light btn-primary btn-xs"> <i class="fa fa-pencil"></i> </a>
                                 @endif
                             </td>
