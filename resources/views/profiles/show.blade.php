@@ -14,26 +14,39 @@
                             @endif
 
                             <div class="profile-info-detail">
-                                <h3 class="m-t-0 m-b-0">{{ $profile->name }}</h3>
+                                <h3 class="m-t-0 m-b-0">
+                                    @if(Auth::check() && Auth::user()->profiles->contains($profile))
+                                        <a href="{{ route('profile.edit', $profile->slug) }}" class="btn btn-icon waves-effect waves-light btn-primary btn-xs"> <i class="fa fa-pencil"></i> </a>
+                                    @endif
+                                    {{ $profile->name }}
+                                </h3>
                                 <p class="text-muted m-b-20"><i>{{ $profile->city }}, {{ $profile->country }}</i></p>
                                 @markdown($profile->about)
 
                                 <div class="button-list m-t-20">
-                                    <button type="button" class="btn btn-facebook btn-sm waves-effect waves-light">
-                                        <i class="fa fa-facebook"></i>
-                                    </button>
+                                    @if(!is_null($profile->facebook))
+                                        <a href="{{ $profile->facebook }}" class="btn btn-facebook btn-sm waves-effect waves-light">
+                                            <i class="fa fa-facebook"></i>
+                                        </a>
+                                    @endif
 
-                                    <button type="button" class="btn btn-sm btn-twitter waves-effect waves-light">
-                                        <i class="fa fa-twitter"></i>
-                                    </button>
+                                    @if(!is_null($profile->twitter))
+                                        <a href="{{ $profile->twitter }}" class="btn btn-twitter btn-sm waves-effect waves-light">
+                                            <i class="fa fa-twitter"></i>
+                                        </a>
+                                    @endif
 
-                                    <button type="button" class="btn btn-sm btn-linkedin waves-effect waves-light">
-                                        <i class="fa fa-linkedin"></i>
-                                    </button>
+                                    @if(!is_null($profile->linkedin))
+                                        <a href="{{ $profile->linkedin }}" class="btn btn-linkedin btn-sm waves-effect waves-light">
+                                            <i class="fa fa-linkedin"></i>
+                                        </a>
+                                    @endif
 
-                                    <button type="button" class="btn btn-sm btn-dribbble waves-effect waves-light">
-                                        <i class="fa fa-dribbble"></i>
-                                    </button>
+                                    @if(!is_null($profile->googleplus))
+                                        <a href="{{ $profile->googleplus }}" class="btn btn-googleplus btn-sm waves-effect waves-light">
+                                            <i class="fa fa-google-plus"></i>
+                                        </a>
+                                    @endif
 
                                 </div>
                             </div>
@@ -46,82 +59,46 @@
 
                 <div class="col-sm-4">
                     <div class="card-box">
-                        <div class="dropdown pull-right">
-                            <a href="#" class="dropdown-toggle card-drop" data-toggle="dropdown" aria-expanded="false">
-                                <i class="zmdi zmdi-more-vert"></i>
-                            </a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
-                            </ul>
+                        <h4 class="header-title m-t-0 m-b-30">Adres</h4>
+
+                        <div class="text-left">
+                            @if(!is_null($profile->address))
+                                <p class="text-muted font-13"><strong>Adres :</strong> <span class="m-l-15">{{ $profile->address }}</span></p>
+                            @endif
+                            @if(!is_null($profile->zipcode) || !is_null($profile->city))
+                                <p class="text-muted font-13"><strong>Postcode :</strong> <span class="m-l-15">{{ $profile->zipcode or '' }} {{ $profile->city or '' }}</span></p>
+                            @endif
+                            @if(!is_null($profile->country))
+                                <p class="text-muted font-13"><strong>Land :</strong> <span class="m-l-15">{{ $profile->country }}</span></p>
+                            @endif
                         </div>
 
-                        <h4 class="header-title m-t-0 m-b-30">My Team Members</h4>
+                    </div>
 
-                        <ul class="list-group m-b-0 user-list">
-                            <li class="list-group-item">
-                                <a href="#" class="user-list-item">
-                                    <div class="avatar">
-                                        <img src="assets/images/users/avatar-2.jpg" alt="">
-                                    </div>
-                                    <div class="user-desc">
-                                        <span class="name">Michael Zenaty</span>
-                                        <span class="desc">CEO</span>
-                                    </div>
-                                </a>
-                            </li>
+                    <div class="card-box">
+                        <h4 class="header-title m-t-0 m-b-30">Contact</h4>
 
-                            <li class="list-group-item">
-                                <a href="#" class="user-list-item">
-                                    <div class="avatar">
-                                        <img src="assets/images/users/avatar-3.jpg" alt="">
-                                    </div>
-                                    <div class="user-desc">
-                                        <span class="name">James Neon</span>
-                                        <span class="desc">Web Designer</span>
-                                    </div>
-                                </a>
-                            </li>
+                        <div class="text-left">
+                            @if(!is_null($profile->website))
+                                <p class="text-muted font-13"><strong>Website :</strong> <span class="m-l-15"><a target="_blank" href="{{ $profile->website }}">{{ $profile->website }}</a></span></p>
+                            @endif
+                            @if(!is_null($profile->telephone))
+                                <p class="text-muted font-13"><strong>Telefoon :</strong> <span class="m-l-15">{{ $profile->telephone }}</span></p>
+                            @endif
+                            @if(!is_null($profile->mobile))
+                                <p class="text-muted font-13"><strong>Mobiel :</strong> <span class="m-l-15">{{ $profile->mobile }}</span></p>
+                            @endif
+                            @if(!is_null($profile->whatsapp))
+                                <p class="text-muted font-13"><strong>Whatsapp :</strong> <span class="m-l-15">{{ $profile->whatsapp }}</span></p>
+                            @endif
+                            @if(!is_null($profile->company_number))
+                                <p class="text-muted font-13"><strong>KvK nummer :</strong> <span class="m-l-15">{{ $profile->company_number }}</span></p>
+                            @endif
+                            @if(!is_null($profile->vat_number))
+                                <p class="text-muted font-13"><strong>BTW nummer :</strong> <span class="m-l-15">{{ $profile->vat_number }}</span></p>
+                            @endif
+                        </div>
 
-                            <li class="list-group-item">
-                                <a href="#" class="user-list-item">
-                                    <div class="avatar">
-                                        <img src="assets/images/users/avatar-5.jpg" alt="">
-                                    </div>
-                                    <div class="user-desc">
-                                        <span class="name">John Smith</span>
-                                        <span class="desc m-b-0">Web Developer</span>
-                                    </div>
-                                </a>
-                            </li>
-
-                            <li class="list-group-item">
-                                <a href="#" class="user-list-item">
-                                    <div class="avatar">
-                                        <img src="assets/images/users/avatar-6.jpg" alt="">
-                                    </div>
-                                    <div class="user-desc">
-                                        <span class="name">Michael Zenaty</span>
-                                        <span class="desc">Programmer</span>
-                                    </div>
-                                </a>
-                            </li>
-
-                            <li class="list-group-item">
-                                <a href="#" class="user-list-item">
-                                    <div class="avatar">
-                                        <img src="assets/images/users/avatar-1.jpg" alt="">
-                                    </div>
-                                    <div class="user-desc">
-                                        <span class="name">Mat Helme</span>
-                                        <span class="desc">Manager</span>
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
                     </div>
                 </div>
             </div>
