@@ -29,19 +29,35 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        $view = $this->getCurrentListType();
+        $view = $this->getTemplateByRoute();
+        $profiles = $this->getProfilesByRoute();
 
         return view('profiles.' . $view)->with([
-            'profiles' => Profile::paginate(16)
+            'profiles' => $profiles
         ]);
     }
 
     /**
-     * Get the current list type to determine the view.
+     * Returns the (paginated) list of profiles based on the current route.
+     *
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator|\Illuminate\Database\Eloquent\Collection|static[]
+     */
+    private function getProfilesByRoute()
+    {
+        switch(Route::currentRouteName())
+        {
+            case 'guide':return Profile::paginate(16);break;
+            case 'guide.map':return Profile::all();break;
+            case 'guide.list':return Profile::paginate(25);break;
+        }
+    }
+
+    /**
+     * Returns the template name based on the current route.
      *
      * @return string
      */
-    private function getCurrentListType()
+    private function getTemplateByRoute()
     {
         switch(Route::currentRouteName())
         {
