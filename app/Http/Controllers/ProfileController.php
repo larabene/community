@@ -12,6 +12,17 @@ use App\Http\Requests\ProfileRequest;
 class ProfileController extends Controller
 {
     /**
+     * ProfileController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('auth')->only([
+            'myProfiles', 'create', 'store',
+            'edit', 'update'
+        ]);
+    }
+
+    /**
      * Get the index of all profiles.
      *
      * @return $this

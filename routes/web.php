@@ -11,7 +11,7 @@ Route::group(['prefix' => 'gids'], function() {
     Route::get('/lijst', ['as' => 'guide.list', 'uses' => 'ProfileController@index']);
     Route::get('/op-de-kaart', ['as' => 'guide.map', 'uses' => 'ProfileController@index']);
 
-    Route::get('mijn-profielen', ['as' => 'profile.list', 'uses' => 'ProfileController@myProfiles', 'middleware' => ['auth']]);
+    Route::get('mijn-profielen', ['as' => 'profile.list', 'uses' => 'ProfileController@myProfiles']);
     Route::get('nieuw', ['as' => 'profile.create', 'uses' => 'ProfileController@create']);
     Route::get('{profile}', ['as' => 'profile.show', 'uses' => 'ProfileController@show']);
     Route::get('{profile}/bewerken', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
