@@ -38,7 +38,7 @@
                             </h4>
 
                             <p class="text-success text-uppercase m-b-20 font-13">{{ $profile->city }}</p>
-                            <p class="text-muted font-13 text-justify">
+                            <p class="text-muted font-13 text-justify eqHeight">
                                 {{ $profile->intro }}
                             </p>
 
@@ -74,4 +74,13 @@
                 @endforeach
             </div>
         </div>
+@endsection
+
+@section('scripts')
+    <script type="text/javascript" src="/assets/pages/jquery.equalHeights.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.eqHeight').equalHeights();
+        });
+    </script>
 @endsection
