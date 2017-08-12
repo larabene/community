@@ -107,4 +107,21 @@ class ProfileController extends Controller
 
         return redirect(route('profile.list'));
     }
+
+    /**
+     * Edit an existing profile.
+     *
+     * @param Profile $profile
+     * @return $this
+     */
+    public function edit(Profile $profile)
+    {
+        if(!Auth::user()->profiles->contains($profile)) {
+            flash('Je hebt geen toegang tot dit profiel', 'error');
+
+            return redirect(route('profile.list'));
+        }
+
+        return view('profiles.manage.edit')->with(['profile' => $profile]);
+    }
 }
