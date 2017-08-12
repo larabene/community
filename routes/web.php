@@ -16,6 +16,7 @@ Route::group(['prefix' => 'gids'], function() {
     Route::get('{profile}', ['as' => 'profile.show', 'uses' => 'ProfileController@show']);
     Route::get('{profile}/bewerken', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 
+    Route::put('{profile}/bewerken', ['uses' => 'ProfileController@update']);
     Route::post('nieuw', ['as' => 'profile.store', 'uses' => 'ProfileController@store']);
 });
 

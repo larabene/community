@@ -170,6 +170,7 @@ return [
         Laracasts\Flash\FlashServiceProvider::class,
         Indal\Markdown\MarkdownServiceProvider::class,
         Cviebrock\EloquentSluggable\ServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -231,6 +232,7 @@ return [
 
         // Custom
         'Markdown' => Indal\Markdown\Facade::class,
+        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
 

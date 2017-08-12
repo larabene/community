@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 use Route;
+use Image;
 use App\Profile;
 use App\Http\Requests\ProfileRequest;
 
@@ -99,7 +100,11 @@ class ProfileController extends Controller
      */
     public function store(ProfileRequest $request)
     {
-        $profile = Profile::create($request->all());
+        $input = $request->all();
+        $input['logo'] = $this->uploadLogo();
+        $input['date']  = \Carbon\Carbon::createFromFormat('Y', $input['founded_at']);
+
+        $profile = Profile::create($input);
 
         Auth::user()->profiles()->attach($profile);
 
@@ -123,5 +128,100 @@ class ProfileController extends Controller
         }
 
         return view('profiles.manage.edit')->with(['profile' => $profile]);
+    }
+
+    /**
+     * Update a profile.
+     *
+     * @param ProfileRequest $request
+     * @param Profile $profile
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function update(ProfileRequest $request, Profile $profile)
+    {
+        if(!Auth::user()->profiles->contains($profile)) {
+            flash('Je hebt geen toegang tot dit profiel', 'error');
+
+            return redirect(route('profile.list'));
+        }
+
+        $input = $request->except(['_token', '_method']);
+        $input['logo'] = $this->uploadLogo($profile->logo);
+        $input['date']  = \Carbon\Carbon::createFromFormat('Y', $input['founded_at']);
+
+        $profile->update($input);
+    }
+
+    /**
+     * Delete the logo.
+     *
+     * @param Profile $profile
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function removeLogo(Profile $profile)
+    {
+        if(file_exists(storage_path('uploads/logos/' . $profile->logo)) && $profile->logo != "") {
+            File::delete(public_path('uploads/articles/' . $profile->logo));
+            $profile->image = '';
+            $profile->save();
+
+            flash('Het logo is verwijderd.');
+        }
+
+        return redirect(route('profile.edit', [$profile->slug]));
+    }
+
+    /**
+     * Upload a logo.
+     *
+     * @param string $old
+     * @return string
+     */
+    public function uploadLogo($old = '')
+    {
+        if (Request::hasFile('logo'))
+        {
+            $image = Request::file('logo');
+            $filename  = time() . Str::random(10) . '.' . $image->getClientOriginalExtension();
+            $path = public_path('uploads/logos/' . $filename);
+
+            try
+            {
+                Image::make($image->getRealPath())->resize(400, 400)->save($path);
+
+                if($old != "") {
+                    if(file_exists(public_path('uploads/logos/'.$old))) {
+                        File::delete(public_path('uploads/logos/' . $old));
+                    }
+                }
+
+                return $filename;
+            } catch (Exception $e) {
+                return $old;
+            }
+        }
+
+        return $old;
+    }
+
+    /**
+     * Delete a profile.
+     *
+     * @param Profile $profile
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function destroy(Profile $profile)
+    {
+        if(!Auth::user()->profiles->contains($profile)) {
+            flash('Je hebt geen toegang tot dit profiel', 'error');
+
+            return redirect(route('profile.list'));
+        }
+
+        $profile->delete();
+
+        flash('Het bedrijfsprofiel is verwijderd.');
+
+        return redirect(route('profile.list'));
     }
 }
