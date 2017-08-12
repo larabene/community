@@ -103,6 +103,7 @@ class ProfileController extends Controller
         $input['logo'] = $this->uploadLogo();
         $input['hourly_rate'] = str_replace(",", ".", $input['hourly_rate']);
         $input['founded_at']  = \Carbon\Carbon::createFromFormat('Y', $input['founded_at']);
+        $input['user_id'] = \Auth::user()->id;
 
         $profile = Profile::create($input);
 
