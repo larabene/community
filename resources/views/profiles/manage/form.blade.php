@@ -127,7 +127,7 @@
         <div class="form-group{{ $errors->has('logo') ? ' has-error' : '' }}">
             <label class="col-md-2 control-label">Logo</label>
             <div class="col-md-10">
-                <input type="file" class="dropify" name="logo" data-default-file="{{ $profile->logo }}"  />
+                <input type="file" class="dropify" name="logo" data-default-file="{{ asset('uploads/logos/' . $profile->logo) }}"  />
                 <span class="help-block"><small>400 x 400</small></span>
             </div>
         </div>

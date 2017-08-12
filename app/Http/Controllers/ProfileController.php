@@ -165,8 +165,8 @@ class ProfileController extends Controller
      */
     public function removeLogo(Profile $profile)
     {
-        if(file_exists(storage_path('uploads/logos/' . $profile->logo)) && $profile->logo != "") {
-            File::delete(storage_path('uploads/articles/' . $profile->logo));
+        if(file_exists(storage_path('app/public/uploads/logos/' . $profile->logo)) && $profile->logo != "") {
+            File::delete(storage_path('app/public/uploads/articles/' . $profile->logo));
             $profile->image = '';
             $profile->save();
 
@@ -188,15 +188,15 @@ class ProfileController extends Controller
         {
             $image = \Request::file('logo');
             $filename  = time() . str_random(10) . '.' . $image->getClientOriginalExtension();
-            $path = storage_path('uploads/logos/' . $filename);
+            $path = storage_path('app/public/uploads/logos/' . $filename);
 
             try
             {
                 \Image::make($image->getRealPath())->resize(400, 400)->save($path);
 
                 if($old != "") {
-                    if(file_exists(storage_path('uploads/logos/'.$old))) {
-                        \File::delete(storage_path('uploads/logos/' . $old));
+                    if(file_exists(storage_path('app/public/uploads/logos/'.$old))) {
+                        \File::delete(storage_path('app/public/uploads/logos/' . $old));
                     }
                 }
 
