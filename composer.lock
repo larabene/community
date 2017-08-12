@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "2d56d74b034108ee448bf1b5db96a4d1",
+    "content-hash": "4fd169b03913b31ae39d24b0ac5392d4",
     "packages": [
         {
             "name": "andreasindal/laravel-markdown",
@@ -535,6 +535,63 @@
                 }
             ],
             "time": "2015-04-20T18:58:01+00:00"
+        },
+        {
+            "name": "jedrzej/sortable",
+            "version": "0.0.9",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/jedrzej/sortable.git",
+                "reference": "070a76561fc6a47b2eb085b6421c4e14f7e0c2c0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/jedrzej/sortable/zipball/070a76561fc6a47b2eb085b6421c4e14f7e0c2c0",
+                "reference": "070a76561fc6a47b2eb085b6421c4e14f7e0c2c0",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "*",
+                "illuminate/support": "*"
+            },
+            "require-dev": {
+                "codeception/codeception": "2.0.*",
+                "codeception/specify": "*",
+                "mockery/mockery": "*"
+            },
+            "suggest": {
+                "jedrzej/searchable": "Allows filtering your models using request parameters",
+                "jedrzej/withable": "Allows eager loading of relations using request parameters"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Jedrzej\\": "src/Jedrzej/",
+                    "Illuminate\\": "vendor/laravel/framework/src/Illuminate/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jędrzej Kuryło",
+                    "email": "jedrzej.kurylo@gmail.com"
+                }
+            ],
+            "description": "Sortable trait for Laravel's Eloquent models - sort your models using request parameters",
+            "homepage": "https://github.com/jedrzej/sortable",
+            "keywords": [
+                "api",
+                "eloquent",
+                "laravel",
+                "model",
+                "request",
+                "sort",
+                "sortable"
+            ],
+            "time": "2016-03-23T10:08:49+00:00"
         },
         {
             "name": "laracasts/flash",
@@ -2239,6 +2296,66 @@
             "description": "CssToInlineStyles is a class that enables you to convert HTML-pages/files into HTML-pages/files with inline styles. This is very useful when you're sending emails.",
             "homepage": "https://github.com/tijsverkoyen/CssToInlineStyles",
             "time": "2016-09-20T12:50:39+00:00"
+        },
+        {
+            "name": "tucker-eric/eloquentfilter",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Tucker-Eric/EloquentFilter.git",
+                "reference": "3a604048c6867a4b7aa8fa8236a2f26ba6d17c44"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Tucker-Eric/EloquentFilter/zipball/3a604048c6867a4b7aa8fa8236a2f26ba6d17c44",
+                "reference": "3a604048c6867a4b7aa8fa8236a2f26ba6d17c44",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/config": "~5.0",
+                "illuminate/console": "~5.0",
+                "illuminate/database": "~5.0",
+                "illuminate/filesystem": "~5.0",
+                "illuminate/support": "~5.0",
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9.5",
+                "phpunit/phpunit": "~5.4.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "EloquentFilter\\ServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "EloquentFilter\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Eric Tucker",
+                    "email": "tucker.ericm@gmail.com"
+                }
+            ],
+            "description": "An Eloquent way to filter Eloquent Models",
+            "keywords": [
+                "eloquent",
+                "filter",
+                "laravel",
+                "model",
+                "query",
+                "search"
+            ],
+            "time": "2017-08-08T18:38:39+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
