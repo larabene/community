@@ -107,7 +107,9 @@ class ProfileController extends Controller
 
         $profile = Profile::create($input);
 
-        Auth::user()->profiles()->attach($profile);
+        Auth::user()->profiles()->attach($profile, [
+            'primary' => Auth::user()->profiles()->count() > 0 ? 0 : 1
+        ]);
 
         flash('Het profiel toegevoegd.');
 
