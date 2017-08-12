@@ -62,10 +62,10 @@
 
                 <ul class="nav navbar-nav navbar-right">
                     <li class="hidden-xs">
-                        <form role="search" class="app-search">
-                            <input type="text" placeholder="Bedrijven zoeken..."
+                        <form role="search" class="app-search" method="get" action="{{ search_form_action() }}">
+                            <input name="find" type="text" placeholder="Bedrijven zoeken..."
                                    class="form-control">
-                            <a href=""><i class="fa fa-search"></i></a>
+                            <a><i class="fa fa-search"></i></a>
                         </form>
                     </li>
                 </ul>
