@@ -62,9 +62,19 @@ class Profile extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user()
+    public function users()
     {
         return $this->belongsToMany(User::class);
+    }
+
+    /**
+     * Owner (User) relation.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function owner()
+    {
+        return $this->belongsTo(User::class);
     }
 
     /**
