@@ -30,7 +30,12 @@
                             <div class="label label-warning">uitgelicht</div>
                             @endif
 
-                            <h4 class="m-t-0 m-b-5"><a href="" class="text-inverse">{{ $profile->name }}</a></h4>
+                            <h4 class="m-t-0 m-b-5">
+                                @if(Auth::check() && Auth::user()->profiles->contains($profile))
+                                    <a href="{{ route('profile.edit', $profile->slug) }}" class="btn btn-icon waves-effect waves-light btn-primary btn-xs"> <i class="fa fa-pencil"></i> </a>
+                                @endif
+                                <a href="" class="text-inverse">{{ $profile->name }}</a>
+                            </h4>
 
                             <p class="text-success text-uppercase m-b-20 font-13">{{ $profile->city }}</p>
                             <p class="text-muted font-13 text-justify">
