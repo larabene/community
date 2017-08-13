@@ -28,7 +28,5 @@
 @endsection
 
 @section('scripts')
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBOxgetlp8OD4W9QqhsENvcaCxyosdasnA"></script>
-    <script src="assets/plugins/gmaps/gmaps.min.js"></script>
-    <script src="assets/pages/jquery.gmaps.js"></script>
+
 @endsection
