@@ -64,6 +64,8 @@
                     @endforeach
                 </div>
                 @endforeach
+
+                {!! $profiles->render() !!}
             </div>
         </div>
 @endsection
