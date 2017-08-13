@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -15,6 +16,9 @@ class AppServiceProvider extends ServiceProvider
     {
         require_once app_path() . '/Http/helpers.php';
         require_once app_path() . '/Http/validation.php';
+
+        // MySQL Fix for keylength
+        Schema::defaultStringLength(191);
     }
 
     /**
