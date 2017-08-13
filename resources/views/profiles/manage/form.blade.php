@@ -137,7 +137,7 @@
 
         <div class="form-group{{ $errors->has('founded_at') ? ' has-error' : '' }}">
             <div class="col-md-10">
-                <input type="text" class="form-control" name="founded_at" value="{{ old('founded_at', !is_null($profile->founded_at) ? $profile->founded_at->format('Y') : '' ) }}" placeholder="Oprichtingsjaar" />
+                <input type="text" class="form-control" name="founded_at" value="{{ old('founded_at', $profile->founded_at ? $profile->founded_at->format('Y') : '' ) }}" placeholder="Oprichtingsjaar" />
             </div>
         </div>
 
