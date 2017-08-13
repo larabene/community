@@ -80,6 +80,12 @@
                             @endif
                         </div>
 
+                        @if($profile->hasCoordinates())
+                            <div class="gmap">
+                                {!! Mapper::map($profile->coordinates_lat, $profile->coordinates_lng)->render() !!}
+                            </div>
+                        @endif
+
                     </div>
 
                     <div class="card-box">
@@ -111,4 +117,17 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    {!! Mapper::renderJavascript() !!}
+@endsection
+
+@section('styles')
+    <style type="text/css">
+        .gmap {
+            width: 100%;
+            height: 300px;
+        }
+    </style>
 @endsection
