@@ -45,7 +45,10 @@ function createGoogleMap($profiles)
         if($profile->hasCoordinates()) {
             \Mapper::informationWindow($profile->coordinates_lat, $profile->coordinates_lng,
                 $profile->name, [
-                    'markers' => ['animation' => 'DROP']
+                    'markers' => ['animation' => 'DROP'],
+                    'eventClick' => 'window.location = "' . route('profile.show', [$profile->slug]) . '";',
+                    'eventMouseOver' => 'infowindow.setContent("' . $profile->name . '"); infowindow.open(map, this);',
+                    'eventMouseOut' => 'infowindow.close()'
                 ]
             );
         }

@@ -10,7 +10,6 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card-box">
-                        <h4 class="header-title m-t-0 m-b-30">Markers</h4>
                         <div class="gmap">
                             {{ createGoogleMap($profiles) }}
                             {!! Mapper::render() !!}
@@ -24,6 +23,16 @@
 
 @section('scripts')
     {!! Mapper::renderJavascript() !!}
+    <script type="text/javascript">
+        $(function(){
+            $(window).bind("load resize", function(){
+                _winHeight = $(window).height();
+
+                // Setting Height
+                $('.gmap').css({'height':_winHeight * 0.8});
+            });
+        });
+    </script>
 @endsection
 
 @section('styles')
