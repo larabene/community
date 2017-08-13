@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateProfilesTable extends Migration
 {
@@ -13,7 +13,7 @@ class CreateProfilesTable extends Migration
      */
     public function up()
     {
-        /**
+        /*
          * Profiles table
          */
         Schema::create('profiles', function (Blueprint $table) {
@@ -63,10 +63,10 @@ class CreateProfilesTable extends Migration
             $table->timestamps();
         });
 
-        /**
+        /*
          * Pivot table Profile <-> User
          */
-        Schema::create('profile_user', function(Blueprint $table) {
+        Schema::create('profile_user', function (Blueprint $table) {
             $table->integer('profile_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->tinyInteger('primary')->default(0);

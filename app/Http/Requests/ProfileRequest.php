@@ -27,15 +27,15 @@ class ProfileRequest extends FormRequest
         $this->sanitize();
 
         return [
-            'name' => 'required',
-            'emailaddress' => 'nullable|email',
-            'website' => 'nullable|url',
-            'facebook' => 'nullable|url',
-            'twitter' => 'nullable|url',
-            'linkedin' => 'nullable|url',
-            'googleplus' => 'nullable|url',
+            'name'            => 'required',
+            'emailaddress'    => 'nullable|email',
+            'website'         => 'nullable|url',
+            'facebook'        => 'nullable|url',
+            'twitter'         => 'nullable|url',
+            'linkedin'        => 'nullable|url',
+            'googleplus'      => 'nullable|url',
             'coordinates_lat' => 'nullable|lat',
-            'coordinates_lng' => 'nullable|lng'
+            'coordinates_lng' => 'nullable|lng',
         ];
     }
 
@@ -43,7 +43,7 @@ class ProfileRequest extends FormRequest
     {
         $input = $this->all();
 
-        foreach($input as $field => $value) {
+        foreach ($input as $field => $value) {
             $input[$field] = strip_tags($value);
         }
 

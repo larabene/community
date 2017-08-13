@@ -14,8 +14,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        require_once app_path() . '/Http/helpers.php';
-        require_once app_path() . '/Http/validation.php';
+        require_once app_path().'/Http/helpers.php';
+        require_once app_path().'/Http/validation.php';
 
         // MySQL Fix for keylength
         Schema::defaultStringLength(191);

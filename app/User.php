@@ -2,8 +2,8 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
@@ -44,10 +44,8 @@ class User extends Authenticatable
      */
     public function primaryProfile()
     {
-        if(\Auth::check()) {
+        if (\Auth::check()) {
             return \Auth::user()->profiles()->where('primary', 1)->first();
         }
-
-        return null;
     }
 }

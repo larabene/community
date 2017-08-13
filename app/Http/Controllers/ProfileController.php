@@ -4,11 +4,11 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
-use Route;
-use App\Profile;
-use Carbon\Carbon;
 use App\Http\Requests\ProfileRequest;
+use App\Profile;
+use Auth;
+use Carbon\Carbon;
+use Route;
 
 class ProfileController extends Controller
 {
@@ -19,7 +19,7 @@ class ProfileController extends Controller
     {
         $this->middleware('auth')->only([
             'myProfiles', 'create', 'store',
-            'edit', 'update'
+            'edit', 'update',
         ]);
     }
 
@@ -33,8 +33,8 @@ class ProfileController extends Controller
         $view = $this->getTemplateByRoute();
         $profiles = $this->getProfilesByRoute();
 
-        return view('profiles.' . $view)->with([
-            'profiles' => $profiles
+        return view('profiles.'.$view)->with([
+            'profiles' => $profiles,
         ]);
     }
 
@@ -42,6 +42,7 @@ class ProfileController extends Controller
      * Display a company profile.
      *
      * @param Profile $profile
+     *
      * @return $this
      */
     public function show(Profile $profile)
@@ -56,11 +57,10 @@ class ProfileController extends Controller
      */
     private function getProfilesByRoute()
     {
-        switch(Route::currentRouteName())
-        {
-            case 'guide':return Profile::filter(request()->all())->sorted()->paginateFilter(9);break;
-            case 'guide.map':return Profile::filter(request()->all())->sorted()->get();break;
-            case 'guide.list':return Profile::filter(request()->all())->sorted()->get();break;
+        switch (Route::currentRouteName()) {
+            case 'guide':return Profile::filter(request()->all())->sorted()->paginateFilter(9); break;
+            case 'guide.map':return Profile::filter(request()->all())->sorted()->get(); break;
+            case 'guide.list':return Profile::filter(request()->all())->sorted()->get(); break;
         }
     }
 
@@ -71,11 +71,10 @@ class ProfileController extends Controller
      */
     private function getTemplateByRoute()
     {
-        switch(Route::currentRouteName())
-        {
-            case 'guide':return 'cards';break;
-            case 'guide.map':return 'map';break;
-            case 'guide.list':return 'table';break;
+        switch (Route::currentRouteName()) {
+            case 'guide':return 'cards'; break;
+            case 'guide.map':return 'map'; break;
+            case 'guide.list':return 'table'; break;
         }
     }
 
@@ -87,7 +86,7 @@ class ProfileController extends Controller
     public function myProfiles()
     {
         return view('profiles.table')->with([
-            'profiles' => Auth::user()->profiles
+            'profiles' => Auth::user()->profiles,
         ]);
     }
 
@@ -107,20 +106,21 @@ class ProfileController extends Controller
      * Save a profile to the database.
      *
      * @param ProfileRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function store(ProfileRequest $request)
     {
         $input = $request->all();
         $input['logo'] = $this->uploadLogo();
-        $input['hourly_rate'] = str_replace(",", ".", $input['hourly_rate']);
+        $input['hourly_rate'] = str_replace(',', '.', $input['hourly_rate']);
         $input['founded_at'] = $input['founded_at'] ? Carbon::createFromFormat('Y', $input['founded_at']) : null;
         $input['user_id'] = Auth::user()->id;
 
         $profile = Profile::create($input);
 
         Auth::user()->profiles()->attach($profile, [
-            'primary' => Auth::user()->profiles()->count() > 0 ? 0 : 1
+            'primary' => Auth::user()->profiles()->count() > 0 ? 0 : 1,
         ]);
 
         flash('Het profiel toegevoegd.');
@@ -132,11 +132,12 @@ class ProfileController extends Controller
      * Edit an existing profile.
      *
      * @param Profile $profile
+     *
      * @return $this
      */
     public function edit(Profile $profile)
     {
-        if(!Auth::user()->profiles->contains($profile)) {
+        if (!Auth::user()->profiles->contains($profile)) {
             flash('Je hebt geen toegang tot dit profiel', 'error');
 
             return redirect(route('profile.list'));
@@ -149,12 +150,13 @@ class ProfileController extends Controller
      * Update a profile.
      *
      * @param ProfileRequest $request
-     * @param Profile $profile
+     * @param Profile        $profile
+     *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(ProfileRequest $request, Profile $profile)
     {
-        if(!Auth::user()->profiles->contains($profile)) {
+        if (!Auth::user()->profiles->contains($profile)) {
             flash('Je hebt geen toegang tot dit profiel', 'error');
 
             return redirect(route('profile.list'));
@@ -162,7 +164,7 @@ class ProfileController extends Controller
 
         $input = $request->except(['_token', '_method']);
         $input['logo'] = $this->uploadLogo($profile->logo);
-        $input['hourly_rate'] = str_replace(",", ".", $input['hourly_rate']);
+        $input['hourly_rate'] = str_replace(',', '.', $input['hourly_rate']);
         $input['founded_at'] = $input['founded_at'] ? Carbon::createFromFormat('Y', $input['founded_at']) : null;
 
         $profile->update($input);
@@ -176,12 +178,13 @@ class ProfileController extends Controller
      * Delete the logo.
      *
      * @param Profile $profile
+     *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function removeLogo(Profile $profile)
     {
-        if(file_exists(storage_path('app/public/uploads/logos/' . $profile->logo)) && $profile->logo != "") {
-            File::delete(storage_path('app/public/uploads/articles/' . $profile->logo));
+        if (file_exists(storage_path('app/public/uploads/logos/'.$profile->logo)) && $profile->logo != '') {
+            File::delete(storage_path('app/public/uploads/articles/'.$profile->logo));
             $profile->logo = null;
             $profile->save();
 
@@ -195,23 +198,22 @@ class ProfileController extends Controller
      * Upload a logo.
      *
      * @param string $old
+     *
      * @return string
      */
     public function uploadLogo($old = null)
     {
-        if (\Request::hasFile('logo'))
-        {
+        if (\Request::hasFile('logo')) {
             $image = \Request::file('logo');
-            $filename  = time() . str_random(10) . '.' . $image->getClientOriginalExtension();
-            $path = storage_path('app/public/uploads/logos/' . $filename);
+            $filename = time().str_random(10).'.'.$image->getClientOriginalExtension();
+            $path = storage_path('app/public/uploads/logos/'.$filename);
 
-            try
-            {
+            try {
                 \Image::make($image->getRealPath())->resize(400, 400)->save($path);
 
-                if($old != "") {
-                    if(file_exists(storage_path('app/public/uploads/logos/'.$old))) {
-                        \File::delete(storage_path('app/public/uploads/logos/' . $old));
+                if ($old != '') {
+                    if (file_exists(storage_path('app/public/uploads/logos/'.$old))) {
+                        \File::delete(storage_path('app/public/uploads/logos/'.$old));
                     }
                 }
 
@@ -228,11 +230,12 @@ class ProfileController extends Controller
      * Delete a profile.
      *
      * @param Profile $profile
+     *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy(Profile $profile)
     {
-        if(!Auth::user()->profiles->contains($profile)) {
+        if (!Auth::user()->profiles->contains($profile)) {
             flash('Je hebt geen toegang tot dit profiel', 'error');
 
             return redirect(route('profile.list'));
