@@ -163,7 +163,7 @@ class ProfileController extends Controller
         $input = $request->except(['_token', '_method']);
         $input['logo'] = $this->uploadLogo($profile->logo);
         $input['hourly_rate'] = str_replace(",", ".", $input['hourly_rate']);
-        $input['founded_at']  = \Carbon\Carbon::createFromFormat('Y', $input['founded_at']);
+        $input['founded_at'] = $input['founded_at'] ? Carbon::createFromFormat('Y', $input['founded_at']) : null;
 
         $profile->update($input);
 
