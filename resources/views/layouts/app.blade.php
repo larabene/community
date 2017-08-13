@@ -112,7 +112,7 @@
                 <ul>
                     <li class="text-muted menu-title">Bedrijvengids</li>
                     <li>
-                        <a href="{{ route('guide') }}" class="waves-effect"><i class="fa fa-address-card-o" aria-hidden="true"></i> <span> Kaarten </span> </a>
+                        <a href="{{ route('guide') }}" class="waves-effect"><i class="fa fa-address-card-o" aria-hidden="true"></i> <span> Overzicht </span> </a>
                     </li>
                     <li>
                         <a href="{{ route('guide.map') }}" class="waves-effect"><i class="fa fa-map-o" aria-hidden="true"></i> <span> Op de kaart </span> </a>
