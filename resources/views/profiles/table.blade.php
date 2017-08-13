@@ -49,7 +49,7 @@
                         <tr>
                             <th scope="row">
                                 @if($profile->highlight == 1)
-                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <span class="red"><i class="fa fa-star" aria-hidden="true"></i></span>
                                 @endif
                             </th>
                             <td>

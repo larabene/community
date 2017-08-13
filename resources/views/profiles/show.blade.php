@@ -22,6 +22,9 @@
                                     @if(Auth::check() && Auth::user()->profiles->contains($profile))
                                         <a href="{{ route('profile.edit', $profile->slug) }}" class="btn btn-icon waves-effect waves-light btn-primary btn-xs"> <i class="fa fa-pencil"></i> </a>
                                     @endif
+                                    @if($profile->highlight == 1)
+                                        <span class="red"><i class="fa fa-star" aria-hidden="true"></i></span>
+                                    @endif
                                     {{ $profile->name }}
                                 </h3>
                                 <p class="text-muted m-b-20"><i>{{ $profile->city }}, {{ $profile->country }}</i></p>

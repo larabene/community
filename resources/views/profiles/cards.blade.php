@@ -27,7 +27,7 @@
                     <div class="col-lg-4">
                         <div class="card-box project-box">
                             @if($profile->highlight == 1)
-                            <div class="label label-warning">uitgelicht</div>
+                            <div class="label label-warning"><i class="fa fa-star" aria-hidden="true"></i> uitgelicht</div>
                             @endif
 
                             <h4 class="m-t-0 m-b-5">
@@ -55,14 +55,6 @@
                                         @if($profile->available == 1)
                                         <i class="fa fa-check" aria-hidden="true"></i>
                                         @endif
-                                    </h3>
-                                </li>
-                                <li>
-                                    <p class="text-muted">Contact</p>
-                                    <h3 class="m-b-0">
-                                        <a href="{{ route('profile.show', [$profile->slug]) }}">
-                                            <i class="fa fa-envelope" aria-hidden="true"></i>
-                                        </a>
                                     </h3>
                                 </li>
                             </ul>
