@@ -91,7 +91,7 @@
                 </div>
                 @endif
 
-                <h5><a href="{{ route('user.edit') }}">Joshua de Gier</a> </h5>
+                <h5><a href="{{ route('user.edit') }}">{{ Auth::user()->name }}</a> </h5>
                 @if(!is_null(Auth::user()->primaryProfile()))
                 <h6>{{ Auth::user()->primaryProfile()->name }}</h6>
                 @endif
