@@ -32,6 +32,8 @@ class ProfileRequest extends FormRequest
             'twitter' => 'nullable|url',
             'linkedin' => 'nullable|url',
             'googleplus' => 'nullable|url',
+            'coordinates_lat' => 'nullable|lat',
+            'coordinates_lng' => 'nullable|lng',
         ];
     }
 }

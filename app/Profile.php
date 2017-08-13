@@ -121,4 +121,14 @@ class Profile extends Model
     {
         return $this->belongsToMany(Tag::class);
     }
+
+    /**
+     * Check for valid coordinates.
+     *
+     * @return bool
+     */
+    public function hasCoordinates()
+    {
+        return isValidLatitude($this->coordinates_lat) && isValidLongitude($this->coordinates_lng);
+    }
 }

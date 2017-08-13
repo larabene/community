@@ -11,22 +11,26 @@
                 <div class="col-lg-12">
                     <div class="card-box">
                         <h4 class="header-title m-t-0 m-b-30">Markers</h4>
-                        <div id="gmaps-markers" class="gmaps"></div>
+                        <div class="gmap">
+                            {{ createGoogleMap($profiles) }}
+                            {!! Mapper::render() !!}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-    <markers>
-        @foreach($profiles as $profile)
-            @if(!is_null($profile->coordinates_lat) && !is_null($profile->coordinates_lng))
-                <marker class="marker" data-lat="{{ $profile->coordinates_lat }}" data-lng="{{ $profile->coordinates_lng }}" data-name="{{ $profile->name }}" data-url="{{ route('profile.show', [$profile->slug]) }}"></marker>
-            @endif
-        @endforeach
-    </markers>
 @endsection
 
 @section('scripts')
+    {!! Mapper::renderJavascript() !!}
+@endsection
 
+@section('styles')
+<style type="text/css">
+    .gmap {
+        width: 100%;
+        height: 500px;
+    }
+</style>
 @endsection
