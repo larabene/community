@@ -24,6 +24,8 @@ class ProfileRequest extends FormRequest
      */
     public function rules()
     {
+        $this->sanitize();
+
         return [
             'name' => 'required',
             'emailaddress' => 'nullable|email',
@@ -35,5 +37,16 @@ class ProfileRequest extends FormRequest
             'coordinates_lat' => 'nullable|lat',
             'coordinates_lng' => 'nullable|lng',
         ];
+    }
+
+    public function sanitize()
+    {
+        $input = $this->all();
+
+        foreach($input as $field => $value) {
+            $input[$field] = strip_tags($value);
+        }
+
+        $this->replace($input);
     }
 }
