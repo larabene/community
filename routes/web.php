@@ -3,6 +3,9 @@
 Route::get('/', function() {
     return redirect()->route('guide');
 });
+Route::get('/home', function() {
+    return redirect()->route('guide');
+});
 
 // Profile Guide Routes
 Route::group(['prefix' => 'gids'], function() {
