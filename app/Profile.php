@@ -2,11 +2,11 @@
 
 namespace App;
 
+use App\ModelFilters\ProfileFilter;
 use Cviebrock\EloquentSluggable\Sluggable;
+use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Model;
 use Jedrzej\Sortable\SortableTrait;
-use App\ModelFilters\ProfileFilter;
-use EloquentFilter\Filterable;
 
 class Profile extends Model
 {
@@ -17,7 +17,7 @@ class Profile extends Model
      *
      * @var array
      */
-    protected $dates = ['founded_at' ,'created_at', 'updated_at'];
+    protected $dates = ['founded_at', 'created_at', 'updated_at'];
 
     /**
      * Guarded attributes.
@@ -42,8 +42,8 @@ class Profile extends Model
     {
         return [
             'slug' => [
-                'source' => 'name'
-            ]
+                'source' => 'name',
+            ],
         ];
     }
 
@@ -58,7 +58,7 @@ class Profile extends Model
     }
 
     /**
-     * Return the ModelFilter for Profile
+     * Return the ModelFilter for Profile.
      *
      * @return \EloquentFilter\ModelFilter
      */
@@ -68,7 +68,7 @@ class Profile extends Model
     }
 
     /**
-     * Return the list of sortable fields
+     * Return the list of sortable fields.
      *
      * @return array
      */
@@ -81,22 +81,24 @@ class Profile extends Model
      * Return placeholder if no logo is present.
      *
      * @param $value
+     *
      * @return string
      */
     public function getLogoAttribute($value)
     {
-        return is_null($value) ? 'placeholder.png' : $value ;
+        return is_null($value) ? 'placeholder.png' : $value;
     }
 
     /**
-     * Format the hourly_rate attribute
+     * Format the hourly_rate attribute.
      *
      * @param $value
+     *
      * @return string
      */
     public function getHourlyRateAttribute($value)
     {
-        if(is_null($value)) {
+        if (is_null($value)) {
             return 0;
         } else {
             return format_valuta($value);

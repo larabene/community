@@ -4,24 +4,24 @@
  * Format a valuta.
  *
  * @param $decimal
+ *
  * @return string
  */
 function format_valuta($decimal)
 {
-    return number_format($decimal, 2, ",", ".");
+    return number_format($decimal, 2, ',', '.');
 }
 
 /**
- * Returns the correct action for the global search form
+ * Returns the correct action for the global search form.
  */
 function search_form_action()
 {
-    switch(Route::currentRouteName())
-    {
-        case 'guide':return route('guide');break;
-        case 'guide.map':return route('guide.map');break;
+    switch (Route::currentRouteName()) {
+        case 'guide':return route('guide'); break;
+        case 'guide.map':return route('guide.map'); break;
         case 'guide.list':
-        default:return route('guide.list');break;
+        default:return route('guide.list'); break;
     }
 }
 
@@ -34,21 +34,21 @@ function createGoogleMap($profiles)
 {
     \Mapper::map(0, 0,
         [
-            'zoom' => 15,
+            'zoom'      => 15,
             'draggable' => true,
-            'marker' => false,
-            'center' => false,
-            'markers' => ['animation' => 'DROP'],
+            'marker'    => false,
+            'center'    => false,
+            'markers'   => ['animation' => 'DROP'],
         ]);
 
-    foreach($profiles as $profile) {
-        if($profile->hasCoordinates()) {
+    foreach ($profiles as $profile) {
+        if ($profile->hasCoordinates()) {
             \Mapper::informationWindow($profile->coordinates_lat, $profile->coordinates_lng,
                 $profile->name, [
-                    'markers' => ['animation' => 'DROP'],
-                    'eventClick' => 'window.location = "' . route('profile.show', [$profile->slug]) . '";',
-                    'eventMouseOver' => 'infowindow.setContent("' . $profile->name . '"); infowindow.open(map, this);',
-                    'eventMouseOut' => 'infowindow.close()'
+                    'markers'        => ['animation' => 'DROP'],
+                    'eventClick'     => 'window.location = "'.route('profile.show', [$profile->slug]).'";',
+                    'eventMouseOver' => 'infowindow.setContent("'.$profile->name.'"); infowindow.open(map, this);',
+                    'eventMouseOut'  => 'infowindow.close()',
                 ]
             );
         }
@@ -59,6 +59,7 @@ function createGoogleMap($profiles)
  * Function to validate latitude.
  *
  * @param $latitude
+ *
  * @return bool
  */
 function isValidLatitude($latitude)
@@ -70,6 +71,7 @@ function isValidLatitude($latitude)
  * Function to validate longitude.
  *
  * @param $longitude
+ *
  * @return bool
  */
 function isValidLongitude($longitude)

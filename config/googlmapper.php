@@ -1,6 +1,6 @@
 <?php
 
-return array(
+return [
 
     /*
     |--------------------------------------------------------------------------
@@ -203,7 +203,7 @@ return array(
     | Set the default Googlmapper map marker behaviour.
     |
     */
-    'markers' => array(
+    'markers' => [
 
         /*
         |--------------------------------------------------------------------------
@@ -225,7 +225,7 @@ return array(
         */
         'animation' => 'NONE',
 
-    ),
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -245,7 +245,7 @@ return array(
     | Set the default Googlmapper map marker cluster behaviour.
     |
     */
-    'clusters' => array (
+    'clusters' => [
 
         /*
         |--------------------------------------------------------------------------
@@ -297,8 +297,8 @@ return array(
         | hidden and a count is shown.
         |
         */
-        'size' => 2
+        'size' => 2,
 
-    ),
+    ],
 
-);
+];

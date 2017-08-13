@@ -1,14 +1,14 @@
 <?php
 
-Route::get('/', function() {
+Route::get('/', function () {
     return redirect()->route('guide');
 });
-Route::get('/home', function() {
+Route::get('/home', function () {
     return redirect()->route('guide');
 });
 
 // Profile Guide Routes
-Route::group(['prefix' => 'gids'], function() {
+Route::group(['prefix' => 'gids'], function () {
     // Different views
     Route::get('/', ['as' => 'guide', 'uses' => 'ProfileController@index']);
     Route::get('/lijst', ['as' => 'guide.list', 'uses' => 'ProfileController@index']);
@@ -24,7 +24,7 @@ Route::group(['prefix' => 'gids'], function() {
 });
 
 // Authentication Routes
-Route::group(['prefix' => 'gebruiker'], function() {
+Route::group(['prefix' => 'gebruiker'], function () {
     // Profile
     Route::get('bewerken', ['as' => 'user.edit', 'uses' => 'MemberController@edit']);
 

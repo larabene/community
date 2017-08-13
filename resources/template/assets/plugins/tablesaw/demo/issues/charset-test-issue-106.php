@@ -1,5 +1,5 @@
 <?php
-header( "Content-Type:text/html; charset=windows-1250" );
+header('Content-Type:text/html; charset=windows-1250');
 ?>
 <!doctype html>
 <html lang="en">
