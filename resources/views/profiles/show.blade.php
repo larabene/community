@@ -82,7 +82,7 @@
 
                         @if($profile->hasCoordinates())
                             <div class="gmap">
-                                {!! Mapper::map($profile->coordinates_lat, $profile->coordinates_lng)->render() !!}
+                                {!! Mapper::map($profile->coordinates_lat, $profile->coordinates_lng, ['zoom' => 15])->render() !!}
                             </div>
                         @endif
 
