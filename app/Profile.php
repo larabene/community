@@ -78,6 +78,17 @@ class Profile extends Model
     }
 
     /**
+     * Return placeholder if no logo is present.
+     *
+     * @param $value
+     * @return string
+     */
+    public function getLogoAttribute($value)
+    {
+        return is_null($value) ? 'placeholder.png' : $value ;
+    }
+
+    /**
      * Format the hourly_rate attribute
      *
      * @param $value
@@ -85,8 +96,8 @@ class Profile extends Model
      */
     public function getHourlyRateAttribute($value)
     {
-        if(is_null($value) || $value == 0) {
-            return '?';
+        if(is_null($value)) {
+            return 0;
         } else {
             return format_valuta($value);
         }

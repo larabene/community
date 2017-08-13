@@ -35,7 +35,7 @@ class ProfileRequest extends FormRequest
             'linkedin' => 'nullable|url',
             'googleplus' => 'nullable|url',
             'coordinates_lat' => 'nullable|lat',
-            'coordinates_lng' => 'nullable|lng',
+            'coordinates_lng' => 'nullable|lng'
         ];
     }
 
