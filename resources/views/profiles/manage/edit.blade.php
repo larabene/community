@@ -11,6 +11,9 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="card-box">
+
+                        @include('_partials.errors')
+
                         <form class="form-horizontal" method="post" action="{{ route('profile.edit', [$profile->slug]) }}" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}

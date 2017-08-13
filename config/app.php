@@ -166,12 +166,13 @@ return [
         /*
          * Package Service Providers...
          */
+        Cornford\Googlmapper\MapperServiceProvider::class,
+        Cviebrock\EloquentSluggable\ServiceProvider::class,
+        EloquentFilter\ServiceProvider::class,
+        Indal\Markdown\MarkdownServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
         Laravel\Tinker\TinkerServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
-        Indal\Markdown\MarkdownServiceProvider::class,
-        Cviebrock\EloquentSluggable\ServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class,
-        EloquentFilter\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -232,8 +233,9 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         // Custom
-        'Markdown' => Indal\Markdown\Facade::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'Mapper' => Cornford\Googlmapper\Facades\MapperFacade::class,
+        'Markdown' => Indal\Markdown\Facade::class,
 
     ],
 

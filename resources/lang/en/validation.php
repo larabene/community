@@ -105,6 +105,9 @@ return [
         ],
     ],
 
+    'lat' => 'Latitude is incorrect',
+    'lng' => 'Longitude is incorrect',
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Attributes
