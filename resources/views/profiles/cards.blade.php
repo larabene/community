@@ -47,7 +47,7 @@
                             <ul class="list-inline">
                                 <li>
                                     <p class="text-muted">Uurtarief</p>
-                                    <h3 class="m-b-0">{{ $profile->hourly_rate }}</h3>
+                                    <h3 class="m-b-0">{{ $profile->hourly_rate == 0 ? 'p.o.a.' : $profile->hourly_rate }}</h3>
                                 </li>
                                 <li>
                                     <p class="text-muted">Beschikbaar</p>

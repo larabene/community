@@ -57,7 +57,7 @@
                             </td>
                             <td>{{ $profile->city }} {{ $profile->country }}</td>
                             <td>{{ $profile->telephone }}</td>
-                            <td>&euro; {{ $profile->hourly_rate }}</td>
+                            <td>&euro; {{ $profile->hourly_rate == 0 ? 'p.o.a.' : $profile->hourly_rate }}</td>
                             <td>
                                 @if($profile->available == 1)
                                 <i class="fa fa-check" aria-hidden="true"></i>
