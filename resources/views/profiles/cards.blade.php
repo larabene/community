@@ -25,7 +25,7 @@
                 <div class="row">
                     @foreach($rowProfiles as $profile)
                     <div class="col-lg-4">
-                        <div class="card-box project-box {{ $profile->highlight == 1 ? 'highlight' : 'regular' }}">
+                        <div class="card-box project-box {{ $profile->highlight == 1 ? 'highlight' : 'regular' }}" onclick="javascript:window.location='{{ route('profile.show', [$profile->slug]) }}'">
                             @if($profile->highlight == 1)
                             <div class="label label-danger"><i class="fa fa-star" aria-hidden="true"></i> uitgelicht</div>
                             @endif
