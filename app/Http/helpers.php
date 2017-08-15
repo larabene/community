@@ -46,11 +46,11 @@ function createGoogleMap($profiles)
             \Mapper::informationWindow($profile->coordinates_lat, $profile->coordinates_lng,
                 $profile->name, [
                     'animation'      => 'DROP',
-                    'icon'           => '/assets/images/' . ($profile->highlight == 1 ? 'marker_highlight.png' : 'marker.png'),
+                    'icon'           => '/assets/images/'.($profile->highlight == 1 ? 'marker_highlight.png' : 'marker.png'),
                     'eventClick'     => 'window.location = "'.route('profile.show', [$profile->slug]).'";',
                     'eventMouseOver' => 'infowindow.setContent("'.$profile->name.'"); infowindow.open(map, this);',
                     'eventMouseOut'  => 'infowindow.close()',
-                    'draggable'      => false
+                    'draggable'      => false,
                 ]
             );
         }
