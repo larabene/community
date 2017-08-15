@@ -68,7 +68,7 @@ class Profile extends Model
     }
 
     /**
-     * Default Model sorting
+     * Default Model sorting.
      *
      * @var array
      */
