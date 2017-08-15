@@ -8,6 +8,8 @@
         <div class="content">
             <div class="container">
 
+                @include('flash::message')
+
                 <div class="row">
                     <div class="col-sm-4">
                         <a href="{{ route('profile.create') }}" class="btn btn-primary btn-rounded w-md waves-effect waves-light m-b-20">Bedrijf toevoegen</a>
