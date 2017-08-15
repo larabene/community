@@ -49,6 +49,7 @@ function createGoogleMap($profiles)
                     'eventClick'     => 'window.location = "'.route('profile.show', [$profile->slug]).'";',
                     'eventMouseOver' => 'infowindow.setContent("'.$profile->name.'"); infowindow.open(map, this);',
                     'eventMouseOut'  => 'infowindow.close()',
+                    'draggable'      => false,
                 ]
             );
         }
