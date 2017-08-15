@@ -110,6 +110,7 @@
             $('#datatable').dataTable({
                 "paging":   false,
                 "ordering": true,
+                "order": [[ 1, "asc" ]],
                 "info":     false
             });
         });
