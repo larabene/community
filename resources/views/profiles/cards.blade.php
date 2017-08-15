@@ -25,9 +25,9 @@
                 <div class="row">
                     @foreach($rowProfiles as $profile)
                     <div class="col-lg-4">
-                        <div class="card-box project-box">
+                        <div class="card-box project-box {{ $profile->highlight == 1 ? 'highlight' : 'regular' }}">
                             @if($profile->highlight == 1)
-                            <div class="label label-warning"><i class="fa fa-star" aria-hidden="true"></i> uitgelicht</div>
+                            <div class="label label-danger"><i class="fa fa-star" aria-hidden="true"></i> uitgelicht</div>
                             @endif
 
                             <h4 class="m-t-0 m-b-5">

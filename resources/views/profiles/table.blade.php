@@ -46,7 +46,7 @@
                             </thead>
                             <tbody>
                             @foreach($profiles as $profile)
-                            <tr>
+                            <tr class="{{ $profile->highlight == 1 ? 'danger' : '' }}">
                                 <th scope="row">
                                     @if($profile->highlight == 1)
                                     <span class="red"><i class="fa fa-star" aria-hidden="true"></i></span>
