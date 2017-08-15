@@ -31,7 +31,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <div class="card-box">ga
+                    <div class="card-box">
                         <table id="datatable" class="table table-striped">
                             <thead>
                             <tr>
