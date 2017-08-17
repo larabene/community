@@ -158,7 +158,7 @@ class ProfileController extends Controller
         }
 
         $profile->update(array_merge($request->getValidInput(), [
-            'logo'          => $this->uploadLogo(profile->logo),
+            'logo'          => $this->uploadLogo($profile->logo),
             'founded_at'    => $request->founded_at ? Carbon::createFromFormat('Y', $request->founded_at) : null,
         ]));
 
