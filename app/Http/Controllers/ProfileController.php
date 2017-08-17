@@ -110,6 +110,7 @@ class ProfileController extends Controller
     public function store(ProfileRequest $request)
     {
         $profile = Auth::user()->profiles()->create(array_merge($request->getValidInput(), [
+            'user_id'       => Auth::user()->id,
             'logo'          => $this->uploadLogo(),
             'founded_at'    => $request->founded_at ? Carbon::createFromFormat('Y', $request->founded_at) : null,
         ]));
