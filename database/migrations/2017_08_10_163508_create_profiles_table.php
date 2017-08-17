@@ -18,7 +18,6 @@ class CreateProfilesTable extends Migration
          */
         Schema::create('profiles', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned();
             $table->string('slug');
             $table->tinyInteger('active')->default(0);
             $table->tinyInteger('highlight')->default(0);

@@ -3,9 +3,9 @@
 namespace App\Http\Requests;
 
 use Auth;
-use Illuminate\Foundation\Http\FormRequest;
+use SebastiaanLuca\Validator\Validators\Validator;
 
-class ProfileRequest extends FormRequest
+class ProfileRequest extends Validator
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,15 +27,37 @@ class ProfileRequest extends FormRequest
         $this->sanitize();
 
         return [
-            'name'            => 'required',
-            'emailaddress'    => 'nullable|email',
-            'website'         => 'nullable|url',
-            'facebook'        => 'nullable|url',
-            'twitter'         => 'nullable|url',
-            'linkedin'        => 'nullable|url',
-            'googleplus'      => 'nullable|url',
-            'coordinates_lat' => 'nullable|lat',
-            'coordinates_lng' => 'nullable|lng',
+            'available'         => '',
+
+            'name'              => 'required',
+            'address'           => '',
+            'zipcode'           => '',
+            'city'              => '',
+            'country'           => '',
+
+            'coordinates_lat'   => 'nullable|lat',
+            'coordinates_lng'   => 'nullable|lng',
+
+            'website'           => 'nullable|url',
+            'emailaddress'      => 'nullable|email',
+            'telephone'         => '',
+            'mobile'            => '',
+            'whatsapp'          => '',
+
+            'company_number'    => '',
+            'vat_number'        => '',
+
+            'facebook'          => 'nullable|url',
+            'linkedin'          => 'nullable|url',
+            'twitter'           => 'nullable|url',
+            'googleplus'        => 'nullable|url',
+
+            'intro'             => '',
+            'about'             => '',
+            'hourly_rate'       => 'nullable|regex:/^\d*(\.\d{1,2})?$/',
+            'logo'              => '',
+            'founded_at'        => 'nullable|integer|size:4',
+
         ];
     }
 

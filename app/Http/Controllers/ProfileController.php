@@ -1,14 +1,12 @@
 <?php
 
-// Todo: Add logo upload
-
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileRequest;
-use App\Profile;
 use Auth;
-use Carbon\Carbon;
 use Route;
+use App\Profile;
+use Carbon\Carbon;
+use App\Http\Requests\ProfileRequest;
 
 class ProfileController extends Controller
 {
@@ -111,17 +109,14 @@ class ProfileController extends Controller
      */
     public function store(ProfileRequest $request)
     {
-        $input = $request->all();
-        $input['logo'] = $this->uploadLogo();
-        $input['hourly_rate'] = $input['hourly_rate'] ? str_replace(',', '.', $input['hourly_rate']) : null;
-        $input['founded_at'] = $input['founded_at'] ? Carbon::createFromFormat('Y', $input['founded_at']) : null;
-        $input['user_id'] = Auth::user()->id;
+        $profile = Auth::user()->profiles()->create(array_merge($request->getValidInput(), [
+            'logo'          => $this->uploadLogo(),
+            'founded_at'    => $request->founded_at ? Carbon::createFromFormat('Y', $request->founded_at) : null,
+        ]));
 
-        $profile = Profile::create($input);
-
-        Auth::user()->profiles()->attach($profile, [
-            'primary' => Auth::user()->profiles()->count() > 0 ? 0 : 1,
-        ]);
+        if (Auth::user()->profiles()->count() === 1) {
+            Auth::user()->profiles()->updateExistingPivot($profile->id, ['primary' => 1]);
+        }
 
         flash('Het profiel toegevoegd.');
 
@@ -162,12 +157,10 @@ class ProfileController extends Controller
             return redirect(route('profile.list'));
         }
 
-        $input = $request->except(['_token', '_method']);
-        $input['logo'] = $this->uploadLogo($profile->logo);
-        $input['hourly_rate'] = $input['hourly_rate'] ? str_replace(',', '.', $input['hourly_rate']) : null;
-        $input['founded_at'] = $input['founded_at'] ? Carbon::createFromFormat('Y', $input['founded_at']) : null;
-
-        $profile->update($input);
+        $profile->update(array_merge($request->getValidInput(), [
+            'logo'          => $this->uploadLogo(profile->logo),
+            'founded_at'    => $request->founded_at ? Carbon::createFromFormat('Y', $request->founded_at) : null,
+        ]));
 
         flash('Het bedrijfsprofiel is bijgewerkt', 'success');
 
