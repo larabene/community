@@ -28,6 +28,7 @@ class ProfileRequest extends Validator
 
         return [
             'available'         => '',
+            'user_id'           => 'required|exists:users,id',
 
             'name'              => 'required',
             'address'           => '',
@@ -56,7 +57,7 @@ class ProfileRequest extends Validator
             'about'             => '',
             'hourly_rate'       => 'nullable|regex:/^\d*(\.\d{1,2})?$/',
             'logo'              => '',
-            'founded_at'        => 'nullable|integer|size:4',
+            'founded_at'        => 'nullable|date_format:Y',
 
         ];
     }
