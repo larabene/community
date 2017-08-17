@@ -28,7 +28,7 @@ class CreateProfilesTable extends Migration
             $table->string('name');
             $table->string('address')->nullable();
             $table->string('zipcode')->nullable();
-            $table->string('city')->nullable();Í
+            $table->string('city')->nullable();
             $table->string('country')->nullable();
 
             // Coordinates for Google Maps
