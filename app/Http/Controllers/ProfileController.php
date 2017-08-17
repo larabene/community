@@ -113,7 +113,7 @@ class ProfileController extends Controller
     {
         $input = $request->all();
         $input['logo'] = $this->uploadLogo();
-        $input['hourly_rate'] = str_replace(',', '.', $input['hourly_rate']);
+        $input['hourly_rate'] = $input['hourly_rate'] ? str_replace(',', '.', $input['hourly_rate']) : null;
         $input['founded_at'] = $input['founded_at'] ? Carbon::createFromFormat('Y', $input['founded_at']) : null;
         $input['user_id'] = Auth::user()->id;
 
@@ -164,7 +164,7 @@ class ProfileController extends Controller
 
         $input = $request->except(['_token', '_method']);
         $input['logo'] = $this->uploadLogo($profile->logo);
-        $input['hourly_rate'] = str_replace(',', '.', $input['hourly_rate']);
+        $input['hourly_rate'] = $input['hourly_rate'] ? str_replace(',', '.', $input['hourly_rate']) : null;
         $input['founded_at'] = $input['founded_at'] ? Carbon::createFromFormat('Y', $input['founded_at']) : null;
 
         $profile->update($input);
