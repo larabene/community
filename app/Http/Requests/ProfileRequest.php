@@ -28,7 +28,6 @@ class ProfileRequest extends Validator
 
         return [
             'available'         => '',
-            'user_id'           => 'required|exists:users,id',
 
             'name'              => 'required',
             'address'           => '',
