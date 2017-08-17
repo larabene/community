@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
-use Route;
-use App\Profile;
-use Carbon\Carbon;
 use App\Http\Requests\ProfileRequest;
+use App\Profile;
+use Auth;
+use Carbon\Carbon;
+use Route;
 
 class ProfileController extends Controller
 {
