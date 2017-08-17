@@ -18,6 +18,7 @@ class CreateProfilesTable extends Migration
          */
         Schema::create('profiles', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id')->unsigned();
             $table->string('slug');
             $table->tinyInteger('active')->default(0);
             $table->tinyInteger('highlight')->default(0);
@@ -27,7 +28,7 @@ class CreateProfilesTable extends Migration
             $table->string('name');
             $table->string('address')->nullable();
             $table->string('zipcode')->nullable();
-            $table->string('city')->nullable();
+            $table->string('city')->nullable();Í
             $table->string('country')->nullable();
 
             // Coordinates for Google Maps
