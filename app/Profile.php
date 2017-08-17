@@ -24,7 +24,14 @@ class Profile extends Model
      *
      * @var array
      */
-    protected $guarded = [];
+    protected $fillable = [
+        'available', 'name', 'address', 'zipcode', 'city',
+        'country', 'coordinates_lat', 'coordinates_lng',
+        'website', 'emailaddress', 'telephone', 'mobile',
+        'whatsapp', 'company_number', 'vat_number', 'facebook',
+        'linkedin', 'twitter', 'googleplus', 'intro', 'about',
+        'hourly_rate', 'founded_at'
+    ];
 
     /**
      * Parameter key to listen for sorting.
