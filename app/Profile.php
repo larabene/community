@@ -30,7 +30,7 @@ class Profile extends Model
         'website', 'emailaddress', 'telephone', 'mobile',
         'whatsapp', 'company_number', 'vat_number', 'facebook',
         'linkedin', 'twitter', 'googleplus', 'intro', 'about',
-        'hourly_rate', 'founded_at'
+        'hourly_rate', 'founded_at', 'user_id'
     ];
 
     /**
