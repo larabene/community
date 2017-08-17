@@ -1,3 +1,10 @@
 .red {
     color: #f4645f;
 }
+
+.card-box.regular {
+    border: 2px solid #ccc;
+}
+.card-box.highlight {
+    border: 2px solid #f4645f;
+}

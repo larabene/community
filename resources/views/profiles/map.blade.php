@@ -36,10 +36,10 @@
 @endsection
 
 @section('styles')
-<style type="text/css">
-    .gmap {
-        width: 100%;
-        height: 500px;
-    }
-</style>
+    <style type="text/css">
+        .gmap {
+            width: 100%;
+            height: 500px;
+        }
+    </style>
 @endsection

@@ -68,6 +68,13 @@ class Profile extends Model
     }
 
     /**
+     * Default Model sorting.
+     *
+     * @var array
+     */
+    protected $defaultSortCriteria = ['name,asc'];
+
+    /**
      * Return the list of sortable fields.
      *
      * @return array

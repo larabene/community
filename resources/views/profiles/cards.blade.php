@@ -8,6 +8,8 @@
         <div class="content">
             <div class="container">
 
+                @include('flash::message')
+
                 <div class="row">
                     <div class="col-sm-4">
                         <a href="{{ route('profile.create') }}" class="btn btn-primary btn-rounded w-md waves-effect waves-light m-b-20">Bedrijf toevoegen</a>
@@ -25,9 +27,9 @@
                 <div class="row">
                     @foreach($rowProfiles as $profile)
                     <div class="col-lg-4">
-                        <div class="card-box project-box">
+                        <div class="card-box project-box {{ $profile->highlight == 1 ? 'highlight' : 'regular' }}" onclick="javascript:window.location='{{ route('profile.show', [$profile->slug]) }}'">
                             @if($profile->highlight == 1)
-                            <div class="label label-warning"><i class="fa fa-star" aria-hidden="true"></i> uitgelicht</div>
+                            <div class="label label-danger"><i class="fa fa-star" aria-hidden="true"></i> uitgelicht</div>
                             @endif
 
                             <h4 class="m-t-0 m-b-5">

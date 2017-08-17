@@ -31,48 +31,48 @@
 
             <div class="row">
                 <div class="col-md-12">
-
-                    <table id="datatable" class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th><i class="fa fa-star-o" aria-hidden="true"></i></th>
-                            <th>Bedrijfsnaam</th>
-                            <th>Plaats</th>
-                            <th>Telefoon</th>
-                            <th>Uurtarief</th>
-                            <th>Beschikbaar</th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($profiles as $profile)
-                        <tr>
-                            <th scope="row">
-                                @if($profile->highlight == 1)
-                                <span class="red"><i class="fa fa-star" aria-hidden="true"></i></span>
-                                @endif
-                            </th>
-                            <td>
-                                <a href="{{ route('profile.show', $profile->slug) }}">{{ $profile->name }}</a>
-                            </td>
-                            <td>{{ $profile->city }} {{ $profile->country }}</td>
-                            <td>{{ $profile->telephone }}</td>
-                            <td>&euro; {{ $profile->hourly_rate == 0 ? 'p.o.a.' : $profile->hourly_rate }}</td>
-                            <td>
-                                @if($profile->available == 1)
-                                <i class="fa fa-check" aria-hidden="true"></i>
-                                @endif
-                            </td>
-                            <td>
-                                @if(Auth::check() && Auth::user()->profiles->contains($profile))
-                                    <a href="{{ route('profile.edit', $profile->slug) }}" class="btn btn-icon waves-effect waves-light btn-primary btn-xs"> <i class="fa fa-pencil"></i> </a>
-                                @endif
-                            </td>
-                        </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
-
+                    <div class="card-box">
+                        <table id="datatable" class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th><i class="fa fa-star-o" aria-hidden="true"></i></th>
+                                <th>Bedrijfsnaam</th>
+                                <th>Plaats</th>
+                                <th>Telefoon</th>
+                                <th>Uurtarief</th>
+                                <th>Beschikbaar</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($profiles as $profile)
+                            <tr class="{{ $profile->highlight == 1 ? 'danger' : '' }}">
+                                <th scope="row">
+                                    @if($profile->highlight == 1)
+                                    <span class="red"><i class="fa fa-star" aria-hidden="true"></i></span>
+                                    @endif
+                                </th>
+                                <td>
+                                    <a href="{{ route('profile.show', $profile->slug) }}">{{ $profile->name }}</a>
+                                </td>
+                                <td>{{ $profile->city }} {{ $profile->country }}</td>
+                                <td>{{ $profile->telephone }}</td>
+                                <td>&euro; {{ $profile->hourly_rate == 0 ? 'p.o.a.' : $profile->hourly_rate }}</td>
+                                <td>
+                                    @if($profile->available == 1)
+                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                    @endif
+                                </td>
+                                <td>
+                                    @if(Auth::check() && Auth::user()->profiles->contains($profile))
+                                        <a href="{{ route('profile.edit', $profile->slug) }}" class="btn btn-icon waves-effect waves-light btn-primary btn-xs"> <i class="fa fa-pencil"></i> </a>
+                                    @endif
+                                </td>
+                            </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 
@@ -110,6 +110,7 @@
             $('#datatable').dataTable({
                 "paging":   false,
                 "ordering": true,
+                "order": [[ 1, "asc" ]],
                 "info":     false
             });
         });

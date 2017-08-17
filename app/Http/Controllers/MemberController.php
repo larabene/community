@@ -13,4 +13,16 @@ class MemberController extends Controller
             'show',
         ]);
     }
+
+    /**
+     * Edit profile.
+     *
+     * @return string
+     */
+    public function edit()
+    {
+        flash('Deze functie moet nog gebouwd worden', 'warning');
+
+        return redirect()->route('guide');
+    }
 }
