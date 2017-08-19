@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{ app()->getLocale() }}">
 <head>
     <base href="{{ url('/') }}" />
     <meta charset="utf-8">
