@@ -113,6 +113,7 @@ class ProfileController extends Controller
             'user_id'       => Auth::user()->id,
             'logo'          => $this->uploadLogo(),
             'founded_at'    => $request->founded_at ? Carbon::createFromFormat('Y', $request->founded_at) : null,
+            'hourly_rate'   => $request->hourly_rate ? floatval(str_replace([' ', ','], ['', '.'], $request->hourly_rate)): 0,
         ]));
 
         if (Auth::user()->profiles()->count() === 1) {
@@ -161,6 +162,7 @@ class ProfileController extends Controller
         $profile->update(array_merge($request->getValidInput(), [
             'logo'          => $this->uploadLogo($profile->logo),
             'founded_at'    => $request->founded_at ? Carbon::createFromFormat('Y', $request->founded_at) : null,
+            'hourly_rate'   => $request->hourly_rate ? floatval(str_replace([' ', ','], ['', '.'], $request->hourly_rate)): 0,
         ]));
 
         flash('Het bedrijfsprofiel is bijgewerkt', 'success');

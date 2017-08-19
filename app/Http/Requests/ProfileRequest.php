@@ -54,7 +54,7 @@ class ProfileRequest extends Validator
 
             'intro'             => '',
             'about'             => '',
-            'hourly_rate'       => 'nullable|regex:/^\d*(\.\d{1,2})?$/',
+            'hourly_rate'       => 'nullable|regex:/^\d*(\,\d{1,2})?$/',
             'logo'              => '',
             'founded_at'        => 'nullable|date_format:Y',
 

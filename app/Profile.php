@@ -105,7 +105,7 @@ class Profile extends Model
      */
     public function getHourlyRateAttribute($value)
     {
-        if (is_null($value)) {
+        if (is_null($value) || $value == '0.00') {
             return 0;
         } else {
             return format_valuta($value);
