@@ -18,10 +18,13 @@ function format_valuta($decimal)
 function search_form_action()
 {
     switch (Route::currentRouteName()) {
-        case 'guide':return route('guide'); break;
-        case 'guide.map':return route('guide.map'); break;
+        case 'guide':
+            return route('guide');
+        case 'guide.map':
+            return route('guide.map');
         case 'guide.list':
-        default:return route('guide.list'); break;
+        default:
+            return route('guide.list');
     }
 }
 
