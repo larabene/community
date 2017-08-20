@@ -10,17 +10,17 @@ Route::get('/home', function () {
 // Profile Guide Routes
 Route::group(['prefix' => 'gids'], function () {
     // Different views
-    Route::get('/', ['as' => 'guide', 'uses' => 'ProfileController@index']);
-    Route::get('/lijst', ['as' => 'guide.list', 'uses' => 'ProfileController@index']);
-    Route::get('/op-de-kaart', ['as' => 'guide.map', 'uses' => 'ProfileController@index']);
+    Route::get('/', 'ProfileController@index')->name('guide');
+    Route::get('/lijst', 'ProfileController@index')->name('guide.list');
+    Route::get('/op-de-kaart', 'ProfileController@index')->name('guide.map');
 
-    Route::get('mijn-profielen', ['as' => 'profile.list', 'uses' => 'ProfileController@myProfiles']);
-    Route::get('nieuw', ['as' => 'profile.create', 'uses' => 'ProfileController@create']);
-    Route::get('{profile}', ['as' => 'profile.show', 'uses' => 'ProfileController@show']);
-    Route::get('{profile}/bewerken', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
+    Route::get('mijn-profielen', 'ProfileController@myProfiles')->name('profile.list');
+    Route::get('nieuw', 'ProfileController@create')->name('profile.create');
+    Route::get('{profile}', 'ProfileController@show')->name('profile.show');
+    Route::get('{profile}/bewerken', 'ProfileController@edit')->name('profile.edit');
 
-    Route::put('{profile}/bewerken', ['uses' => 'ProfileController@update']);
-    Route::post('nieuw', ['as' => 'profile.store', 'uses' => 'ProfileController@store']);
+    Route::put('{profile}/bewerken', 'ProfileController@update');
+    Route::post('nieuw', 'ProfileController@store')->name('profile.store');
 });
 
 // Authentication Routes
