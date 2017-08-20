@@ -56,9 +56,12 @@ class ProfileController extends Controller
     private function getProfilesByRoute()
     {
         switch (Route::currentRouteName()) {
-            case 'guide':return Profile::filter(request()->all())->sorted()->paginateFilter(9); break;
-            case 'guide.map':return Profile::filter(request()->all())->sorted()->get(); break;
-            case 'guide.list':return Profile::filter(request()->all())->sorted()->get(); break;
+            case 'guide':
+                return Profile::filter(request()->all())->sorted()->paginateFilter(9);
+            case 'guide.map':
+                return Profile::filter(request()->all())->sorted()->get();
+            case 'guide.list':
+                return Profile::filter(request()->all())->sorted()->get();
         }
     }
 
@@ -70,9 +73,12 @@ class ProfileController extends Controller
     private function getTemplateByRoute()
     {
         switch (Route::currentRouteName()) {
-            case 'guide':return 'cards'; break;
-            case 'guide.map':return 'map'; break;
-            case 'guide.list':return 'table'; break;
+            case 'guide':
+                return 'cards';
+            case 'guide.map':
+                return 'map';
+            case 'guide.list':
+                return 'table';
         }
     }
 
