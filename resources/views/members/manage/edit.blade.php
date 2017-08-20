@@ -13,6 +13,7 @@
                     <div class="card-box">
 
                         @include('_partials.errors')
+                        @include('flash::message')
 
                         <form class="form-horizontal" method="post" action="{{ route('user.update', [$user->slug]) }}">
                             {{ csrf_field() }}

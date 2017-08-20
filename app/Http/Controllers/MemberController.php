@@ -19,9 +19,9 @@ class MemberController extends Controller
     }
 
     /**
-     * Edit member.
+     * Edit profile.
      *
-     * @return
+     * @return $this
      */
     public function edit()
     {
@@ -33,7 +33,8 @@ class MemberController extends Controller
     /**
      * Update member.
      *
-     * @return
+     * @param MemberRequest $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(MemberRequest $request)
     {
@@ -46,7 +47,7 @@ class MemberController extends Controller
         }
         $user->save();
 
-        flash('De member is bijgewerkt', 'success');
+        flash('Je profiel is bijgewertkt.', 'success');
 
         return redirect(route('user.edit'));
     }
