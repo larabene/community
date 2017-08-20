@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
+use App\User;
+use App\Http\Requests\MemberRequest;
+
 class MemberController extends Controller
 {
     /**
@@ -15,14 +19,39 @@ class MemberController extends Controller
     }
 
     /**
-     * Edit profile.
+     * Edit member.
      *
-     * @return string
+     * @return
      */
     public function edit()
     {
-        flash('Deze functie moet nog gebouwd worden', 'warning');
+        $id = Auth::user()->id;
 
-        return redirect()->route('guide');
+        $user = User::findOrFail($id);
+
+        return view('members.manage.edit')->with(['user' => $user]);
+    }
+
+    /**
+     * Update member.
+     *
+     * @return
+     */
+    public function update(MemberRequest $request)
+    {
+        $id = Auth::user()->id;
+
+        $user = User::findOrFail($id);
+
+        $user->name = $request->name;
+        $user->email = $request->email;
+        if (!empty($request->password)) {
+            $user->password = bcrypt($request->password);
+        }
+        $user->save();
+
+        flash('De member is bijgewerkt', 'success');
+
+        return redirect(route('user.edit'));
     }
 }
