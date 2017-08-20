@@ -25,9 +25,7 @@ class MemberController extends Controller
      */
     public function edit()
     {
-        $id = Auth::user()->id;
-
-        $user = User::findOrFail($id);
+        $user = Auth::user();
 
         return view('members.manage.edit')->with(['user' => $user]);
     }
@@ -39,9 +37,7 @@ class MemberController extends Controller
      */
     public function update(MemberRequest $request)
     {
-        $id = Auth::user()->id;
-
-        $user = User::findOrFail($id);
+        $user = Auth::user();
 
         $user->name = $request->name;
         $user->email = $request->email;

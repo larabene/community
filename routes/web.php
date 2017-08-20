@@ -26,8 +26,8 @@ Route::group(['prefix' => 'gids'], function () {
 // Authentication Routes
 Route::group(['prefix' => 'gebruiker'], function () {
     // Profile
-    Route::get('bewerken', ['as' => 'user.edit', 'uses' => 'MemberController@edit']);
-    Route::put('bewerken', ['as' => 'user.edit', 'uses' => 'MemberController@update']);
+    Route::get('bewerken', 'MemberController@edit')->name('user.edit');
+    Route::put('bewerken', 'MemberController@update')->name('user.update');
 
     // Login and Logout Routes...
     Route::get('inloggen', 'Auth\LoginController@showLoginForm')->name('login');

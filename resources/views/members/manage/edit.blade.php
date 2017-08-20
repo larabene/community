@@ -14,7 +14,7 @@
 
                         @include('_partials.errors')
 
-                        <form class="form-horizontal" method="post" action="{{ route('user.edit', [$user->slug]) }}">
+                        <form class="form-horizontal" method="post" action="{{ route('user.update', [$user->slug]) }}">
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
 

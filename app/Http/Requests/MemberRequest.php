@@ -28,8 +28,8 @@ class MemberRequest extends FormRequest
         $id = Auth::user()->id;
 
         return [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $id,
+            'name' => 'required|string|max:191',
+            'email' => 'required|string|email|max:191|unique:users,email,' . $id,
             'password' => 'string|min:8|confirmed|nullable',
         ];
     }
