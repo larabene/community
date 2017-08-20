@@ -17,6 +17,6 @@
 <meta name="twitter:title" content="{{ config('app.name') }}">
 <meta name="twitter:description" content="{{ $page_description or 'LaraBeNe - Nederlands/Belgische Laravel community' }}">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:site" content="@LaraBeNe">
+<meta name="twitter:site" content="@LaraBeNe1">
 <meta name="twitter:image" content="{{ asset('images/Logo.png') }}">
-<meta name="twitter:creator" content="@LaraBeNe">
+<meta name="twitter:creator" content="@LaraBeNe1">
