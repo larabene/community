@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Http\Requests\Member;
+namespace App\Http\Requests;
 
+use Auth;
+use App\Http\Requests\MemberRequest;
 use Illuminate\Foundation\Http\FormRequest;
 
 class MemberRequest extends FormRequest
@@ -13,7 +15,7 @@ class MemberRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return Auth::check();
     }
 
     /**
@@ -23,8 +25,12 @@ class MemberRequest extends FormRequest
      */
     public function rules()
     {
+        $id = Auth::user()->id;
+
         return [
-            //
+            'name' => 'required|string|max:191',
+            'email' => 'required|string|email|max:191|unique:users,email,' . $id,
+            'password' => 'string|min:8|confirmed|nullable',
         ];
     }
 }
