@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
-use App\User;
 use App\Http\Requests\MemberRequest;
+use App\User;
+use Auth;
 
 class MemberController extends Controller
 {
@@ -34,6 +34,7 @@ class MemberController extends Controller
      * Update member.
      *
      * @param MemberRequest $request
+     *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(MemberRequest $request)

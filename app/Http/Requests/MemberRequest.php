@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use Auth;
-use App\Http\Requests\MemberRequest;
 use Illuminate\Foundation\Http\FormRequest;
 
 class MemberRequest extends FormRequest
@@ -28,8 +27,8 @@ class MemberRequest extends FormRequest
         $id = Auth::user()->id;
 
         return [
-            'name' => 'required|string|max:191',
-            'email' => 'required|string|email|max:191|unique:users,email,' . $id,
+            'name'     => 'required|string|max:191',
+            'email'    => 'required|string|email|max:191|unique:users,email,'.$id,
             'password' => 'string|min:8|confirmed|nullable',
         ];
     }
