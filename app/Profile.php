@@ -110,7 +110,7 @@ class Profile extends Model
         if (is_null($value)) {
             return 0;
         } else {
-            return format_valuta($value);
+            return format_currency($value);
         }
     }
 

@@ -7,7 +7,7 @@
  *
  * @return string
  */
-function format_valuta($decimal)
+function format_currency($decimal)
 {
     return number_format($decimal, 2, ',', '.');
 }
