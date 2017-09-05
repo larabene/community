@@ -11,8 +11,7 @@
                 <div class="col-lg-12">
                     <div class="card-box">
                         <div class="gmap">
-                            {{ createGoogleMap($profiles) }}
-                            {!! Mapper::render() !!}
+                            {{ render_map($profiles) }}
                         </div>
                     </div>
                 </div>

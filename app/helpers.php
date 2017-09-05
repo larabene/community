@@ -1,5 +1,9 @@
 <?php
 
+use App\Profile;
+use Cornford\Googlmapper\Facades\MapperFacade as Mapper;
+use Illuminate\Support\Collection;
+
 /**
  * Format a valuta.
  *
@@ -31,37 +35,30 @@ function search_form_action()
 /**
  * Generates the Googlmapper from all profiles.
  *
- * @param $profiles
+ * @param Collection $profiles
  */
-function createGoogleMap($profiles)
+function render_map(Collection $profiles)
 {
-    \Mapper::map(
-        0,
-        0,
-        [
-            'zoom'      => 15,
-            'draggable' => true,
-            'marker'    => false,
-            'center'    => false,
-            'markers'   => ['animation' => 'DROP'],
-        ]
-    );
+    Mapper::map(0, 0, [
+        'zoom' => 15,
+        'draggable' => true,
+        'marker' => false,
+        'center' => false,
+        'markers' => ['animation' => 'DROP'],
+    ]);
 
-    foreach ($profiles as $profile) {
-        if ($profile->hasCoordinates()) {
-            \Mapper::informationWindow(
-                $profile->coordinates_lat,
-                $profile->coordinates_lng,
-                $profile->name,
-                [
-                    'animation'      => 'DROP',
-                    'icon'           => '/assets/images/'.($profile->highlight == 1 ? 'marker_highlight.png' : 'marker.png'),
-                    'eventClick'     => 'window.location = "'.route('profile.show', [$profile->slug]).'";',
-                    'eventMouseOver' => 'infowindow.setContent("'.$profile->name.'"); infowindow.open(map, this);',
-                    'eventMouseOut'  => 'infowindow.close()',
-                    'draggable'      => false,
-                ]
-            );
-        }
-    }
+    $profiles
+        ->filter->hasCoordinates()
+        ->each(function (Profile $profile) {
+            Mapper::informationWindow($profile->coordinates_lat, $profile->coordinates_lng, $profile->name, [
+                'animation' => 'DROP',
+                'icon' => '/assets/images/' . ($profile->highlight ? 'marker_highlight.png' : 'marker.png'),
+                'eventClick' => 'window.location = "' . route('profile.show', [$profile->slug]) . '";',
+                'eventMouseOver' => 'infowindow.setContent("' . $profile->name . '"); infowindow.open(map, this);',
+                'eventMouseOut' => 'infowindow.close()',
+                'draggable' => false,
+            ]);
+        });
+
+    return Mapper::render();
 }
