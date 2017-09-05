@@ -1,11 +1,9 @@
 <?php
 
-Route::get('/', function () {
-    return redirect()->route('guide');
-});
-Route::get('/home', function () {
-    return redirect()->route('guide');
-});
+use Illuminate\Support\Facades\Route;
+
+Route::redirect('/', route('guide'));
+Route::redirect('/home', route('guide'));
 
 // Profile Guide Routes
 Route::group(['prefix' => 'gids'], function () {
