@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileRequest;
 use App\Profile;
-use Auth;
-use Carbon\Carbon;
-use Route;
+use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\UnauthorizedException;
+use Intervention\Image\Facades\Image;
 
 class ProfileController extends Controller
 {
@@ -16,22 +19,28 @@ class ProfileController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->only([
-            'myProfiles', 'create', 'store',
-            'edit', 'update',
+            'myProfiles',
+            'create',
+            'store',
+            'edit',
+            'update',
         ]);
     }
 
     /**
      * Get the index of all profiles.
      *
+     * @param Request $request
      * @return $this
      */
-    public function index()
+    public function index(Request $request)
     {
-        $view = $this->getTemplateByRoute();
-        $profiles = $this->getProfilesByRoute();
+        $routeName = Route::currentRouteName();
 
-        return view('profiles.'.$view)->with([
+        $view = $this->getTemplateByRoute($routeName);
+        $profiles = $this->getProfilesByRoute($request, $routeName);
+
+        return view($view, [
             'profiles' => $profiles,
         ]);
     }
@@ -45,52 +54,54 @@ class ProfileController extends Controller
      */
     public function show(Profile $profile)
     {
-        return view('profiles.show')->with(['profile' => $profile]);
+        return view('profiles.show', [
+            'profile' => $profile,
+        ]);
     }
 
     /**
      * Returns the (paginated) list of profiles based on the current route.
      *
+     * @param Request $request
+     * @param string $routeName
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator|\Illuminate\Database\Eloquent\Collection|static[]
      */
-    private function getProfilesByRoute()
+    private function getProfilesByRoute(Request $request, string $routeName)
     {
-        switch (Route::currentRouteName()) {
-            case 'guide':
-                return Profile::filter(request()->all())->sorted()->paginateFilter(9);
-            case 'guide.map':
-                return Profile::filter(request()->all())->sorted()->get();
-            case 'guide.list':
-                return Profile::filter(request()->all())->sorted()->get();
-        }
+        $query = Profile::filter($request->all())->sorted();
+
+        return $routeName === 'guide'
+            ? $query->paginateFilter(9)
+            : $query->get();
     }
 
     /**
      * Returns the template name based on the current route.
      *
+     * @param string $routeName
      * @return string
      */
-    private function getTemplateByRoute()
+    private function getTemplateByRoute(string $routeName)
     {
-        switch (Route::currentRouteName()) {
-            case 'guide':
-                return 'cards';
-            case 'guide.map':
-                return 'map';
-            case 'guide.list':
-                return 'table';
-        }
+        static $map = [
+            'guide' => 'profiles.cards',
+            'guide.map' => 'profiles.map',
+            'guide.list' => 'profiles.table',
+        ];
+
+        return $map[$routeName];
     }
 
     /**
      * List the current users profiles.
      *
+     * @param Request $request
      * @return $this
      */
-    public function myProfiles()
+    public function myProfiles(Request $request)
     {
         return view('profiles.table')->with([
-            'profiles' => Auth::user()->profiles,
+            'profiles' => $request->user()->profiles,
         ]);
     }
 
@@ -101,9 +112,9 @@ class ProfileController extends Controller
      */
     public function create()
     {
-        $profile = new Profile();
-
-        return view('profiles.manage.create')->with(['profile' => $profile]);
+        return view('profiles.manage.create', [
+            'profile' => new Profile(),
+        ]);
     }
 
     /**
@@ -115,36 +126,35 @@ class ProfileController extends Controller
      */
     public function store(ProfileRequest $request)
     {
-        $profile = Auth::user()->profiles()->create(array_merge($request->getValidInput(), [
-            'user_id'       => Auth::user()->id,
-            'logo'          => $this->uploadLogo(),
-            'founded_at'    => $request->founded_at ? Carbon::createFromFormat('Y', $request->founded_at) : null,
-            'hourly_rate'   => $request->hourly_rate ? floatval(str_replace([' ', ','], ['', '.'], $request->hourly_rate)) : null,
+        $user = $request->user();
+
+        $profile = $user->profiles()->create(array_merge($request->getValidInput(), [
+            'logo' => $this->uploadLogo(),
+            'founded_at' => $request->founded_at,
+            'hourly_rate' => $request->hourly_rate,
         ]));
 
-        if (Auth::user()->profiles()->count() === 1) {
-            Auth::user()->profiles()->updateExistingPivot($profile->id, ['primary' => 1]);
+        if ($user->profiles()->count() === 1) {
+            $user->profiles()->updateExistingPivot($profile->id, [
+                'primary' => 1,
+            ]);
         }
 
         flash('Het profiel toegevoegd.');
 
-        return redirect(route('profile.list'));
+        return redirect()->route('profile.list');
     }
 
     /**
      * Edit an existing profile.
      *
+     * @param Request $request
      * @param Profile $profile
-     *
      * @return $this
      */
-    public function edit(Profile $profile)
+    public function edit(Request $request, Profile $profile)
     {
-        if (!Auth::user()->profiles->contains($profile)) {
-            flash('Je hebt geen toegang tot dit profiel', 'error');
-
-            return redirect(route('profile.list'));
-        }
+        $this->assertActionAllowed($request->user(), $profile);
 
         return view('profiles.manage.edit')->with(['profile' => $profile]);
     }
@@ -153,27 +163,21 @@ class ProfileController extends Controller
      * Update a profile.
      *
      * @param ProfileRequest $request
-     * @param Profile        $profile
+     * @param Profile $profile
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(ProfileRequest $request, Profile $profile)
     {
-        if (!Auth::user()->profiles->contains($profile)) {
-            flash('Je hebt geen toegang tot dit profiel', 'error');
-
-            return redirect(route('profile.list'));
-        }
+        $this->assertActionAllowed($request->user(), $profile);
 
         $profile->update(array_merge($request->getValidInput(), [
-            'logo'          => $this->uploadLogo($profile->logo),
-            'founded_at'    => $request->founded_at ? Carbon::createFromFormat('Y', $request->founded_at) : null,
-            'hourly_rate'   => $request->hourly_rate ? floatval(str_replace([' ', ','], ['', '.'], $request->hourly_rate)) : null,
+            'logo' => $this->uploadLogo($profile->logo),
         ]));
 
         flash('Het bedrijfsprofiel is bijgewerkt', 'success');
 
-        return redirect(route('profile.list'));
+        return redirect()->route('profile.list');
     }
 
     /**
@@ -185,68 +189,86 @@ class ProfileController extends Controller
      */
     public function removeLogo(Profile $profile)
     {
-        if (file_exists(storage_path('app/public/uploads/logos/'.$profile->logo)) && $profile->logo != '') {
-            File::delete(storage_path('app/public/uploads/articles/'.$profile->logo));
-            $profile->logo = null;
-            $profile->save();
+        Storage::disk('public')->delete($profile->logo);
+        $profile->logo = null;
+        $profile->save();
 
-            flash('Het logo is verwijderd.');
-        }
+        flash('Het logo is verwijderd.');
 
-        return redirect(route('profile.edit', [$profile->slug]));
+        return redirect()->route('profile.edit', [
+            $profile->slug,
+        ]);
     }
 
     /**
      * Upload a logo.
      *
+     * @param Request $request
      * @param string $old
-     *
      * @return string
      */
-    public function uploadLogo($old = null)
+    private function uploadLogo(Request $request, $old = null)
     {
-        if (\Request::hasFile('logo')) {
-            $image = \Request::file('logo');
-            $filename = time().str_random(10).'.'.$image->getClientOriginalExtension();
-            $path = storage_path('app/public/uploads/logos/'.$filename);
-
-            try {
-                \Image::make($image->getRealPath())->resize(400, 400)->save($path);
-
-                if ($old != '') {
-                    if (file_exists(storage_path('app/public/uploads/logos/'.$old))) {
-                        \File::delete(storage_path('app/public/uploads/logos/'.$old));
-                    }
-                }
-
-                return $filename;
-            } catch (Exception $e) {
-                return $old;
-            }
+        if ( ! $request->hasFile('logo')) {
+            return $old;
         }
 
-        return $old;
+        try {
+            $filename = $request->file('logo')->storePublicly('uploads/logos');
+            Image::make($filename)->resize(400, 400)->save($filename);
+
+            if ($old) {
+                Storage::disk('public')->delete($filename);
+            }
+        } catch (Exception $e) {
+            $filename = $old;
+        }
+
+        return $filename;
     }
 
     /**
      * Delete a profile.
      *
+     * @param Request $request
      * @param Profile $profile
-     *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function destroy(Profile $profile)
+    public function destroy(Request $request, Profile $profile)
     {
-        if (!Auth::user()->profiles->contains($profile)) {
-            flash('Je hebt geen toegang tot dit profiel', 'error');
-
-            return redirect(route('profile.list'));
-        }
+        $this->assertActionAllowed($request->user(), $profile);
 
         $profile->delete();
 
         flash('Het bedrijfsprofiel is verwijderd.');
 
-        return redirect(route('profile.list'));
+        return redirect()->route('profile.list');
+    }
+
+    /**
+     * @param string $method
+     * @param array $parameters
+     * @return \Illuminate\Http\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function callAction($method, $parameters)
+    {
+        try {
+            return parent::callAction($method, $parameters);
+        } catch (UnauthorizedException $e) {
+            flash('Je hebt geen toegang tot dit profiel', 'error');
+
+            return redirect()->route('profile.list');
+        }
+    }
+
+    /**
+     * @param User $user
+     * @param Profile $profile
+     */
+    private function assertActionAllowed(User $user, Profile $profile): void
+    {
+        if ( ! $user->profiles->contains($profile)) {
+            throw new UnauthorizedException();
+        }
     }
 }

@@ -36,6 +36,13 @@ class Profile extends Model
     protected $sortParameterName = 'sorteer';
 
     /**
+     * Default Model sorting.
+     *
+     * @var array
+     */
+    protected $defaultSortCriteria = ['name,asc'];
+
+    /**
      * Return the sluggable configuration array for this model.
      *
      * @return array
@@ -70,32 +77,29 @@ class Profile extends Model
     }
 
     /**
-     * Default Model sorting.
-     *
-     * @var array
-     */
-    protected $defaultSortCriteria = ['name,asc'];
-
-    /**
      * Return the list of sortable fields.
      *
      * @return array
      */
     public function getSortableAttributes()
     {
-        return ['name', 'city', 'country', 'highlight'];
+        return [
+            'name',
+            'city',
+            'country',
+            'highlight',
+        ];
     }
 
     /**
      * Return placeholder if no logo is present.
      *
      * @param $value
-     *
      * @return string
      */
     public function getLogoAttribute($value)
     {
-        return is_null($value) ? 'placeholder.png' : $value;
+        return $value ?: 'placeholder.png';
     }
 
     /**
@@ -107,11 +111,25 @@ class Profile extends Model
      */
     public function getHourlyRateAttribute($value)
     {
-        if (is_null($value)) {
-            return 0;
-        } else {
-            return format_currency($value);
-        }
+        return $value
+            ? format_currency($value)
+            : 0;
+    }
+
+    /**
+     * @param string $year
+     */
+    public function setFoundedAtAttribute($year)
+    {
+        $this->attributes['founded_at'] = Carbon::createFromFormat('Y', $year);
+    }
+
+    /**
+     * @param string $rate
+     */
+    public function setHourlyRateAttribute($rate)
+    {
+         $this->attributes['hourly_rate'] = floatval(str_replace([' ', ','], ['', '.'], $rate));
     }
 
     /**
