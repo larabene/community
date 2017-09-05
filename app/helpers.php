@@ -3,6 +3,7 @@
 use App\Profile;
 use Cornford\Googlmapper\Facades\MapperFacade as Mapper;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Route;
 
 /**
  * Format a valuta.
@@ -21,15 +22,15 @@ function format_currency($decimal)
  */
 function search_form_action()
 {
-    switch (Route::currentRouteName()) {
-        case 'guide':
-            return route('guide');
-        case 'guide.map':
-            return route('guide.map');
-        case 'guide.list':
-        default:
-            return route('guide.list');
-    }
+    static $valid = [
+        'guide',
+        'guide.map',
+    ];
+
+    $current = Route::currentRouteName();
+    $target = in_array($current, $valid) ? $current : 'guide.list';
+
+    return route($target);
 }
 
 /**
