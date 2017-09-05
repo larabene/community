@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
 class MemberRequest extends FormRequest
@@ -14,7 +13,7 @@ class MemberRequest extends FormRequest
      */
     public function authorize()
     {
-        return Auth::check();
+        return (bool)$this->user();
     }
 
     /**
@@ -24,12 +23,12 @@ class MemberRequest extends FormRequest
      */
     public function rules()
     {
-        $id = Auth::user()->id;
+        $id = $this->user()->id;
 
         return [
-            'name'     => 'required|string|max:191',
-            'email'    => 'required|string|email|max:191|unique:users,email,'.$id,
-            'password' => 'string|min:8|confirmed|nullable',
+            'name' => 'required|string|max:191',
+            'email' => 'required|string|email|max:191|unique:users,email,' . $id,
+            'password' => 'min:8|confirmed|nullable',
         ];
     }
 }

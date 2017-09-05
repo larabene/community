@@ -28,6 +28,14 @@ class User extends Authenticatable
     ];
 
     /**
+     * @param string $password
+     */
+    public function setPasswordAttribute(string $password)
+    {
+        $this->attributes['password'] = bcrypt($password);
+    }
+
+    /**
      * Profile relation.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -40,12 +48,10 @@ class User extends Authenticatable
     /**
      * Returns the primary profile.
      *
-     * @return null
+     * @return Profile|null
      */
     public function primaryProfile()
     {
-        if (\Auth::check()) {
-            return \Auth::user()->profiles()->where('primary', 1)->first();
-        }
+        return $this->profiles()->where('primary', 1)->first();
     }
 }

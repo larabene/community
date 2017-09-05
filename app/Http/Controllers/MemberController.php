@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\MemberRequest;
-use App\User;
-use Auth;
+use Illuminate\Http\Request;
 
 class MemberController extends Controller
 {
@@ -21,13 +20,14 @@ class MemberController extends Controller
     /**
      * Edit profile.
      *
+     * @param Request $request
      * @return $this
      */
-    public function edit()
+    public function edit(Request $request)
     {
-        $user = Auth::user();
-
-        return view('members.manage.edit')->with(['user' => $user]);
+        return view('members.manage.edit')->with([
+            'user' => $request->user(),
+        ]);
     }
 
     /**
@@ -39,17 +39,16 @@ class MemberController extends Controller
      */
     public function update(MemberRequest $request)
     {
-        $user = Auth::user();
+        $data = collect($request->input())->only([
+            'name',
+            'email',
+            'password',
+        ])->filter();
 
-        $user->name = $request->name;
-        $user->email = $request->email;
-        if (!empty($request->password)) {
-            $user->password = bcrypt($request->password);
-        }
-        $user->save();
+        $request->user()->fill($data->all())->saveOrFail();
 
         flash('Je profiel is bijgewertkt.', 'success');
 
-        return redirect(route('user.edit'));
+        return redirect()->route('user.edit');
     }
 }
