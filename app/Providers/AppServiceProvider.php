@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Profile;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -19,6 +21,10 @@ class AppServiceProvider extends ServiceProvider
 
         // MySQL Fix for keylength
         Schema::defaultStringLength(191);
+
+        Relation::morphMap([
+            'profile' => Profile::class,
+        ]);
     }
 
     /**

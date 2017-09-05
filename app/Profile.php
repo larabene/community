@@ -135,11 +135,11 @@ class Profile extends Model
     /**
      * Tag relation.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
      */
     public function tags()
     {
-        return $this->belongsToMany(Tag::class);
+        return $this->morphToMany(Tag::class, 'taggable')->withTimestamps();
     }
 
     /**
