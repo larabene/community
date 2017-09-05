@@ -1,5 +1,7 @@
 <?php
 
+use App\Profile;
+use App\Tag;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -11,6 +13,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        factory(Profile::class)
+            ->times(12)
+            ->create()
+            ->each(function (Profile $profile) {
+                $tags = factory(Tag::class)->times(3)->create();
+                $profile->tags()->attach(
+                    $tags->modelKeys()
+                );
+            });
     }
 }
