@@ -65,27 +65,3 @@ function createGoogleMap($profiles)
         }
     }
 }
-
-/**
- * Function to validate latitude.
- *
- * @param $latitude
- *
- * @return bool
- */
-function isValidLatitude($latitude)
-{
-    return preg_match("/^-?([1-8]?[1-9]|[1-9]0)\.{1}\d{1,6}$/", $latitude) == 1;
-}
-
-/**
- * Function to validate longitude.
- *
- * @param $longitude
- *
- * @return bool
- */
-function isValidLongitude($longitude)
-{
-    return preg_match("/^-?([1]?[1-7][1-9]|[1]?[1-8][0]|[1-9]?[0-9])\.{1}\d{1,6}$/", $longitude) == 1;
-}

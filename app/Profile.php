@@ -3,6 +3,8 @@
 namespace App;
 
 use App\ModelFilters\ProfileFilter;
+use App\Rules\Latitude;
+use App\Rules\Longitude;
 use Cviebrock\EloquentSluggable\Sluggable;
 use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Model;
@@ -149,6 +151,7 @@ class Profile extends Model
      */
     public function hasCoordinates()
     {
-        return isValidLatitude($this->coordinates_lat) && isValidLongitude($this->coordinates_lng);
+        return Latitude::valid($this->coordinates_lat)
+            && Longitude::valid($this->coordinates_lng);
     }
 }

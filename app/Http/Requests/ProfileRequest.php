@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\Latitude;
+use App\Rules\Longitude;
 use Auth;
 use SebastiaanLuca\Validator\Validators\Validator;
 
@@ -35,8 +37,8 @@ class ProfileRequest extends Validator
             'city'              => '',
             'country'           => '',
 
-            'coordinates_lat'   => 'nullable|lat',
-            'coordinates_lng'   => 'nullable|lng',
+            'coordinates_lat'   => ['nullable', new Latitude()],
+            'coordinates_lng'   => ['nullable', new Longitude()],
 
             'website'           => 'nullable|url',
             'emailaddress'      => 'nullable|email',
