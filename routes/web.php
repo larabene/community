@@ -2,8 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::redirect('/', route('guide'));
-Route::redirect('/home', route('guide'));
+Route::redirect('/', 'gids');
+Route::redirect('/home', 'gids');
 
 // Profile Guide Routes
 Route::group(['prefix' => 'gids'], function () {
