@@ -35,19 +35,25 @@ function search_form_action()
  */
 function createGoogleMap($profiles)
 {
-    \Mapper::map(0, 0,
+    \Mapper::map(
+        0,
+        0,
         [
             'zoom'      => 15,
             'draggable' => true,
             'marker'    => false,
             'center'    => false,
             'markers'   => ['animation' => 'DROP'],
-        ]);
+        ]
+    );
 
     foreach ($profiles as $profile) {
         if ($profile->hasCoordinates()) {
-            \Mapper::informationWindow($profile->coordinates_lat, $profile->coordinates_lng,
-                $profile->name, [
+            \Mapper::informationWindow(
+                $profile->coordinates_lat,
+                $profile->coordinates_lng,
+                $profile->name,
+                [
                     'animation'      => 'DROP',
                     'icon'           => '/assets/images/'.($profile->highlight == 1 ? 'marker_highlight.png' : 'marker.png'),
                     'eventClick'     => 'window.location = "'.route('profile.show', [$profile->slug]).'";',
