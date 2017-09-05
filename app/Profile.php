@@ -12,7 +12,7 @@ use Jedrzej\Sortable\SortableTrait;
 
 class Profile extends Model
 {
-    use Sluggable, Filterable, SortableTrait;
+    use Sluggable, Filterable, SortableTrait, Taggable;
 
     /**
      * Date Fields.
@@ -150,16 +150,6 @@ class Profile extends Model
     public function owner()
     {
         return $this->belongsTo(User::class);
-    }
-
-    /**
-     * Tag relation.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
-     */
-    public function tags()
-    {
-        return $this->morphToMany(Tag::class, 'taggable')->withTimestamps();
     }
 
     /**
