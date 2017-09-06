@@ -5,6 +5,7 @@ namespace App;
 use App\ModelFilters\ProfileFilter;
 use App\Rules\Latitude;
 use App\Rules\Longitude;
+use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Sluggable;
 use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Model;
@@ -122,7 +123,8 @@ class Profile extends Model
      */
     public function setFoundedAtAttribute($year)
     {
-        $this->attributes['founded_at'] = Carbon::createFromFormat('Y', $year);
+        if(!empty($year))
+            $this->attributes['founded_at'] = Carbon::createFromFormat('Y', $year);
     }
 
     /**

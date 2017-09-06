@@ -133,7 +133,7 @@ class ProfileController extends Controller
         $user = $request->user();
 
         $profile = $user->profiles()->create(array_merge($request->getValidInput(), [
-            'logo' => $this->uploadLogo(),
+            'logo' => $this->uploadLogo($request),
         ]));
 
         if ($user->profiles()->count() === 1) {
@@ -175,7 +175,7 @@ class ProfileController extends Controller
         $this->assertActionAllowed($request->user(), $profile);
 
         $profile->update(array_merge($request->getValidInput(), [
-            'logo' => $this->uploadLogo($profile->logo),
+            'logo' => $this->uploadLogo($request),
         ]));
 
         flash('Het bedrijfsprofiel is bijgewerkt', 'success');
