@@ -95,6 +95,7 @@ class Profile extends Model
      * Return placeholder if no logo is present.
      *
      * @param $value
+     *
      * @return string
      */
     public function getLogoAttribute($value)
@@ -129,7 +130,7 @@ class Profile extends Model
      */
     public function setHourlyRateAttribute($rate)
     {
-         $this->attributes['hourly_rate'] = floatval(str_replace([' ', ','], ['', '.'], $rate));
+        $this->attributes['hourly_rate'] = floatval(str_replace([' ', ','], ['', '.'], $rate));
     }
 
     /**
