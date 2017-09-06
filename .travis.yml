@@ -18,6 +18,7 @@ cache:
 before_script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
+  - cp .env.testing .env
   - composer install --prefer-dist --ignore-platform-reqs
   - nvm install node
   - npm install -g yarn
