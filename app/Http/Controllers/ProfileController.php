@@ -130,8 +130,6 @@ class ProfileController extends Controller
 
         $profile = $user->profiles()->create(array_merge($request->getValidInput(), [
             'logo' => $this->uploadLogo(),
-            'founded_at' => $request->founded_at,
-            'hourly_rate' => $request->hourly_rate,
         ]));
 
         if ($user->profiles()->count() === 1) {
