@@ -31,6 +31,7 @@ class ProfileController extends Controller
      * Get the index of all profiles.
      *
      * @param Request $request
+     *
      * @return $this
      */
     public function index(Request $request)
@@ -63,7 +64,8 @@ class ProfileController extends Controller
      * Returns the (paginated) list of profiles based on the current route.
      *
      * @param Request $request
-     * @param string $routeName
+     * @param string  $routeName
+     *
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator|\Illuminate\Database\Eloquent\Collection|static[]
      */
     private function getProfilesByRoute(Request $request, string $routeName)
@@ -79,13 +81,14 @@ class ProfileController extends Controller
      * Returns the template name based on the current route.
      *
      * @param string $routeName
+     *
      * @return string
      */
     private function getTemplateByRoute(string $routeName)
     {
         static $map = [
-            'guide' => 'profiles.cards',
-            'guide.map' => 'profiles.map',
+            'guide'      => 'profiles.cards',
+            'guide.map'  => 'profiles.map',
             'guide.list' => 'profiles.table',
         ];
 
@@ -96,6 +99,7 @@ class ProfileController extends Controller
      * List the current users profiles.
      *
      * @param Request $request
+     *
      * @return $this
      */
     public function myProfiles(Request $request)
@@ -148,6 +152,7 @@ class ProfileController extends Controller
      *
      * @param Request $request
      * @param Profile $profile
+     *
      * @return $this
      */
     public function edit(Request $request, Profile $profile)
@@ -161,7 +166,7 @@ class ProfileController extends Controller
      * Update a profile.
      *
      * @param ProfileRequest $request
-     * @param Profile $profile
+     * @param Profile        $profile
      *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
@@ -202,12 +207,13 @@ class ProfileController extends Controller
      * Upload a logo.
      *
      * @param Request $request
-     * @param string $old
+     * @param string  $old
+     *
      * @return string
      */
     private function uploadLogo(Request $request, $old = null)
     {
-        if ( ! $request->hasFile('logo')) {
+        if (!$request->hasFile('logo')) {
             return $old;
         }
 
@@ -230,6 +236,7 @@ class ProfileController extends Controller
      *
      * @param Request $request
      * @param Profile $profile
+     *
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function destroy(Request $request, Profile $profile)
@@ -245,7 +252,8 @@ class ProfileController extends Controller
 
     /**
      * @param string $method
-     * @param array $parameters
+     * @param array  $parameters
+     *
      * @return \Illuminate\Http\RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function callAction($method, $parameters)
@@ -260,12 +268,12 @@ class ProfileController extends Controller
     }
 
     /**
-     * @param User $user
+     * @param User    $user
      * @param Profile $profile
      */
     private function assertActionAllowed(User $user, Profile $profile): void
     {
-        if ( ! $user->profiles->contains($profile)) {
+        if (!$user->profiles->contains($profile)) {
             throw new UnauthorizedException();
         }
     }
