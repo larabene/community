@@ -32,6 +32,6 @@ class MigrateTagsToMorphMany extends Migration
      */
     public function down()
     {
-        DB::truncate('profile_tag');
+        DB::truncate('taggables');
     }
 }
