@@ -146,16 +146,6 @@ class Profile extends Model
     }
 
     /**
-     * Owner (User) relation.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function owner()
-    {
-        return $this->belongsTo(User::class);
-    }
-
-    /**
      * Check for valid coordinates.
      *
      * @return bool
