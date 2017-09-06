@@ -6,7 +6,7 @@ use Illuminate\Contracts\Validation\Rule;
 
 class Latitude implements Rule
 {
-    const PATTERN = "/^-?([1-8]?[1-9]|[1-9]0)\.{1}\d{1,6}$/";
+    const PATTERN = "/^-?([1-8]?[0-9]|[1-9]0)\.{1}\d{1,6}$/";
 
     /**
      * @param mixed $value
