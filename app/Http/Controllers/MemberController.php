@@ -21,6 +21,7 @@ class MemberController extends Controller
      * Edit profile.
      *
      * @param Request $request
+     *
      * @return $this
      */
     public function edit(Request $request)

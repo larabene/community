@@ -13,7 +13,7 @@ class MemberRequest extends FormRequest
      */
     public function authorize()
     {
-        return (bool)$this->user();
+        return (bool) $this->user();
     }
 
     /**
@@ -26,8 +26,8 @@ class MemberRequest extends FormRequest
         $id = $this->user()->id;
 
         return [
-            'name' => 'required|string|max:191',
-            'email' => 'required|string|email|max:191|unique:users,email,' . $id,
+            'name'     => 'required|string|max:191',
+            'email'    => 'required|string|email|max:191|unique:users,email,'.$id,
             'password' => 'min:8|confirmed|nullable',
         ];
     }

@@ -10,6 +10,7 @@ class Latitude implements Rule
 
     /**
      * @param mixed $value
+     *
      * @return bool
      */
     public static function valid($value): bool
@@ -20,8 +21,9 @@ class Latitude implements Rule
     /**
      * Determine if the validation rule passes.
      *
-     * @param  string  $attribute
-     * @param  mixed  $value
+     * @param string $attribute
+     * @param mixed  $value
+     *
      * @return bool
      */
     public function passes($attribute, $value)
