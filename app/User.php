@@ -38,7 +38,7 @@ class User extends Authenticatable
     /**
      * Profile relation.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function profiles()
     {
