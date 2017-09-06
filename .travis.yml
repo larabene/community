@@ -1,33 +1,31 @@
 sudo: required
 language: php
 dist: trusty
-
 php:
-  - 7.1
-  - 7.2
-
+- 7.1
+- 7.2
 branches:
   except:
-    - /^analysis-/
-
+  - "/^analysis-/"
 cache:
   yarn: true
   directories:
-    - $HOME/.composer/cache/files
-
+  - "$HOME/.composer/cache/files"
 before_script:
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
-  - cp .env.testing .env
-  - composer install --prefer-dist --ignore-platform-reqs
-  - nvm install node
-  - npm install -g yarn
-  - yarn
-  - npm run dev -- --progress=false
-  - cp .env.dusk .env
-  - ./vendor/laravel/dusk/bin/chromedriver-linux &
-  - php artisan serve &
-
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
+- cp .env.testing .env
+- composer install --prefer-dist --ignore-platform-reqs
+- nvm install node
+- npm install -g yarn
+- yarn
+- npm run dev -- --progress=false
+- cp .env.dusk .env
+- "./vendor/laravel/dusk/bin/chromedriver-linux &"
+- php artisan serve &
 script:
- - ./vendor/bin/phpunit
- - php artisan dusk
+- "./vendor/bin/phpunit"
+- php artisan dusk
+notifications:
+  slack:
+    secure: uyiHpfoINoOMYqy62aI73u+B7L/chGhFrtWMuWdiGQlmHYJHrX9VDv09N08DS44+AhqbLF4CWUhIwMaFtOuevou0p0sva6RfARYPit/Ndo94Lw+3waLGY3FezzM0FrcuKs1fkKUvsZpMiJd1ESvKcaS4sBdWXTOPqysVDq+4uRUW/wOCYbh/aTfOO0S7d/9sD2l10tw4Z06YwdntDNU3aqvZr4Pw8CH2gfKZ9zojXviubFXwuZa+fNoQafgAG27jzj4Ftnr8jSTOTEgToNVrAMqI6hEXAqxujmW98vzD6Vu+oqmVJ9ikruyTq9mgJuIZqjJzdiO2Mgf1Mn9q6ubWDBElsmtwTolKp2zWcMDVXlEqm1aeiQOL9R8AuIbVRVZaYf7sMk4TKsRlns8/c1efKcvNMHYANx6hwltyF5SjLfRVjqML1m8ZWAJgfX5RB2UvcWd/+DtLIctufm0uNPrAbiEtfkWU13hqKZBQ0JsB7Bi40aiIcBkpzlwzJwjuUwgXjpB+HKtjxsbiN/6GsexgfjQ9P5FHO48qq08tEk23qU0IobXYOVCrhLrWg6pZe8UueT1q9NhLdZ1dhn76dYwm1mzNY3Z8f2smaM2XwFtuxx9N4KTpf30bvoIC3a076ECSJPQ1QSBEuncfGkprm1hJ5FRU2I/5drUSxgv3J2gcZfk=
