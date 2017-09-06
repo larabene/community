@@ -5,6 +5,7 @@ namespace App;
 use App\ModelFilters\ProfileFilter;
 use App\Rules\Latitude;
 use App\Rules\Longitude;
+use Carbon\Carbon;
 use Cviebrock\EloquentSluggable\Sluggable;
 use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Model;
