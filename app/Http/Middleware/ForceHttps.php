@@ -17,7 +17,7 @@ class ForceHttps
      */
     public function handle($request, Closure $next)
     {
-        if (!$request->secure() && App::environment('production') && config('app.force_ssl')) {
+        if (! $request->secure() && App::environment('production') && config('app.force_ssl')) {
             return redirect()->secure($request->getRequestUri());
         }
 

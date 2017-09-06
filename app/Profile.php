@@ -123,8 +123,9 @@ class Profile extends Model
      */
     public function setFoundedAtAttribute($year)
     {
-        if(!empty($year))
+        if (! empty($year)) {
             $this->attributes['founded_at'] = Carbon::createFromFormat('Y', $year);
+        }
     }
 
     /**

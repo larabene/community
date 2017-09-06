@@ -213,7 +213,7 @@ class ProfileController extends Controller
      */
     private function uploadLogo(Request $request, $old = null)
     {
-        if (!$request->hasFile('logo')) {
+        if (! $request->hasFile('logo')) {
             return $old;
         }
 
@@ -273,7 +273,7 @@ class ProfileController extends Controller
      */
     private function assertActionAllowed(User $user, Profile $profile): void
     {
-        if (!$user->profiles->contains($profile)) {
+        if (! $user->profiles->contains($profile)) {
             throw new UnauthorizedException();
         }
     }
