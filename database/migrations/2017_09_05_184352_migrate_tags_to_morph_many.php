@@ -21,7 +21,6 @@ class MigrateTagsToMorphMany extends Migration
                 $profile = Profile::find($profileId);
                 $profile->tags()->sync($records->pluck('tag_id'));
             });
-        die;
     }
 
     /**
