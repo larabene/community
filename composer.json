@@ -22,6 +22,7 @@
         "fideloper/proxy": "~3.3"
     },
     "require-dev": {
+        "doctrine/dbal": "^2.6",
         "filp/whoops": "~2.0",
         "fzaninotto/faker": "~1.4",
         "laravel/dusk": "^2.0",
