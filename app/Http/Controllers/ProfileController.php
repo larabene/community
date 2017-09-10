@@ -222,8 +222,8 @@ class ProfileController extends Controller
             Image::make($filename)->resize(400, 400)->save($filename);
 
             if ($old) {
-                $filename = public_path('uploads/logos/' . $old);
-                Storage::disk('public')->delete($filename);
+                $old = public_path('uploads/logos/' . $old);
+                Storage::disk('public')->delete($old);
             }
         } catch (Exception $e) {
             $filename = $old;
