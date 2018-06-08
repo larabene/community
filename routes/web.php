@@ -16,6 +16,9 @@ Route::group(['prefix' => 'gids'], function () {
     Route::get('/lijst', 'ProfileController@index')->name('guide.list');
     Route::get('/op-de-kaart', 'ProfileController@index')->name('guide.map');
 
+    Route::get('slack', 'SlackInviteController@create')->name('slack_invites.create');
+    Route::post('slack', 'SlackInviteController@store')->name('slack_invites.store');
+
     Route::get('mijn-profielen', 'ProfileController@myProfiles')->name('profile.list');
     Route::get('nieuw', 'ProfileController@create')->name('profile.create');
     Route::get('{profile}', 'ProfileController@show')->name('profile.show');

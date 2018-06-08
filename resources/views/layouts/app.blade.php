@@ -124,10 +124,7 @@
 
                     <li class="text-muted menu-title">Slack</li>
                     <li>
-                        <a href="https://larabene.signup.team" target="_blank" class="waves-effect"><i class="fa fa-slack" aria-hidden="true"></i> <span> Invite Page </span> </a>
-                    </li>
-                    <li>
-                        <a href="https://larabene.slackarchive.io/general" target="_blank" class="waves-effect"><i class="fa fa-history" aria-hidden="true"></i> <span> SlackArchive.io </span></a>
+                        <a href="{{ route('slack_invites.create') }}" class="waves-effect"><i class="fa fa-slack" aria-hidden="true"></i> <span> Invite Page </span> </a>
                     </li>
 
                     <li class="text-muted menu-title">Gebruiker</li>

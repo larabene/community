@@ -8,18 +8,19 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": ">=7.0.0",
+        "php": ">=7.1.0",
         "andreasindal/laravel-markdown": "^1.1",
         "cornford/googlmapper": "2.*",
         "cviebrock/eloquent-sluggable": "^4.2",
+        "fideloper/proxy": "~3.3",
+        "guzzlehttp/guzzle": "^6.3",
         "intervention/image": "^2.4",
         "jedrzej/sortable": "^0.0.9",
         "laracasts/flash": "^3.0",
         "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
         "sebastiaanluca/laravel-validator": "~0.2.0",
-        "tucker-eric/eloquentfilter": "^1.2",
-        "fideloper/proxy": "~3.3"
+        "tucker-eric/eloquentfilter": "^1.2"
     },
     "require-dev": {
         "doctrine/dbal": "^2.6",
