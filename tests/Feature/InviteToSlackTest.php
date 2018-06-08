@@ -50,7 +50,7 @@ class InviteToSlackTest extends TestCase
         ]);
 
         $response->assertRedirect();
-        $response->assertSessionHas('message');
+        $response->assertSessionHas('flash_notification');
         $this->slack->assertInvited('john.doe@example.com');
     }
 }

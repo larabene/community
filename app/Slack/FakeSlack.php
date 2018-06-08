@@ -9,7 +9,7 @@ class FakeSlack implements Slack
     /**
      * @var array
      */
-    private $invites;
+    private $invites = [];
 
     /**
      * @param string $email
