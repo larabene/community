@@ -175,6 +175,7 @@ return [
         Intervention\Image\ImageServiceProvider::class,
         Laravel\Tinker\TinkerServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -238,6 +239,7 @@ return [
         'Image'    => Intervention\Image\Facades\Image::class,
         'Mapper'   => Cornford\Googlmapper\Facades\MapperFacade::class,
         'Markdown' => Indal\Markdown\Facade::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class,
 
     ],
 

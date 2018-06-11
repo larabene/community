@@ -10,6 +10,7 @@
     "require": {
         "php": ">=7.1.0",
         "andreasindal/laravel-markdown": "^1.1",
+        "barryvdh/laravel-debugbar": "~2.4",
         "cornford/googlmapper": "2.*",
         "cviebrock/eloquent-sluggable": "^4.2",
         "fideloper/proxy": "~3.3",
