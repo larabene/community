@@ -46,6 +46,10 @@ class MemberController extends Controller
             'password',
         ])->filter();
 
+        if($data->has('password')) {
+            $data->put('password', bcrypt($data->get('password')));
+        }
+
         $request->user()->fill($data->all())->saveOrFail();
 
         flash('Je profiel is bijgewertkt.', 'success');

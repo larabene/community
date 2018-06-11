@@ -28,14 +28,6 @@ class User extends Authenticatable
     ];
 
     /**
-     * @param string $password
-     */
-    public function setPasswordAttribute(string $password)
-    {
-        $this->attributes['password'] = bcrypt($password);
-    }
-
-    /**
      * Profile relation.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
