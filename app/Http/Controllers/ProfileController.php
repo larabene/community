@@ -197,7 +197,7 @@ class ProfileController extends Controller
      */
     public function removeLogo(Profile $profile)
     {
-        // Todo: empty collection with Avatars
+        $profile->clearMediaCollection('avatars');
 
         flash('Het logo is verwijderd.');
 
