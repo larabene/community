@@ -10,10 +10,14 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Model;
 use Jedrzej\Sortable\SortableTrait;
+use Spatie\Image\Manipulations;
+use Spatie\MediaLibrary\Media;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\HasMedia\Interfaces\HasMediaConversions;
 
-class Profile extends Model
+class Profile extends Model implements HasMediaConversions
 {
-    use Sluggable, Filterable, SortableTrait, Taggable;
+    use Sluggable, Filterable, SortableTrait, Taggable, HasMediaTrait;
 
     /**
      * Date Fields.
@@ -58,6 +62,17 @@ class Profile extends Model
     }
 
     /**
+     * @param Media|null $media
+     * @throws \Spatie\Image\Exceptions\InvalidManipulation
+     */
+    public function registerMediaConversions(Media $media = null)
+    {
+        $this->addMediaConversion('thumb')
+            ->fit(Manipulations::FIT_FILL, 400, 400)
+            ->performOnCollections('avatars');
+    }
+
+    /**
      * Get the route key for the model.
      *
      * @return string
@@ -95,13 +110,15 @@ class Profile extends Model
     /**
      * Return placeholder if no logo is present.
      *
-     * @param $value
-     *
      * @return string
      */
-    public function getLogoAttribute($value)
+    public function getLogoAttribute()
     {
-        return $value ?: 'placeholder.png';
+        if($this->hasMedia('avatars')) {
+            return $this->getFirstMediaUrl('avatars', 'thumb');
+        }
+
+        return 'avatar-placeholder.png';
     }
 
     /**

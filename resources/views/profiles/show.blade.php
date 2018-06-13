@@ -14,7 +14,7 @@
                         <div class="profile-info-name">
 
                             @if(!empty($profile->logo))
-                            <img src="{{ asset('storage/uploads/logos/' . $profile->logo) }}" class="img-thumbnail" alt="{{ $profile->name }}">
+                            <img src="{{ asset($profile->logo) }}" class="img-thumbnail" alt="{{ $profile->name }}">
                             @endif
 
                             <div class="profile-info-detail">

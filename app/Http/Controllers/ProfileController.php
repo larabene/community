@@ -163,20 +163,25 @@ class ProfileController extends Controller
     }
 
     /**
-     * Update a profile.
-     *
      * @param ProfileRequest $request
-     * @param Profile        $profile
-     *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @param Profile $profile
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Spatie\MediaLibrary\Exceptions\FileCannotBeAdded
      */
     public function update(ProfileRequest $request, Profile $profile)
     {
         $this->assertActionAllowed($request->user(), $profile);
 
-        $profile->update(array_merge($request->getValidInput(), [
-            'logo' => $this->uploadLogo($request),
-        ]));
+        $profile->update($request->getValidInput());
+
+        if($request->has('logo')) {
+            $profile->clearMediaCollection('avatars');
+
+            $profile->addMediaFromRequest('logo')
+                ->setName("$profile->slug avatar")
+                ->setFileName($profile->slug . ".png")
+                ->toMediaCollection('avatars');
+        }
 
         flash('Het bedrijfsprofiel is bijgewerkt', 'success');
 
@@ -192,9 +197,7 @@ class ProfileController extends Controller
      */
     public function removeLogo(Profile $profile)
     {
-        Storage::disk('public')->delete($profile->logo);
-        $profile->logo = null;
-        $profile->save();
+        // Todo: empty collection with Avatars
 
         flash('Het logo is verwijderd.');
 
@@ -204,41 +207,10 @@ class ProfileController extends Controller
     }
 
     /**
-     * Upload a logo.
-     *
-     * @param Request $request
-     * @param string  $old
-     *
-     * @return string
-     */
-    private function uploadLogo(Request $request, $old = null)
-    {
-        if (! $request->hasFile('logo')) {
-            return $old;
-        }
-
-        try {
-            $filename = $request->file('logo')->storePublicly('uploads/logos');
-            Image::make($filename)->resize(400, 400)->save($filename);
-
-            if ($old) {
-                $old = public_path('uploads/logos/' . $old);
-                Storage::disk('public')->delete($old);
-            }
-        } catch (Exception $e) {
-            $filename = $old;
-        }
-
-        return $filename;
-    }
-
-    /**
-     * Delete a profile.
-     *
      * @param Request $request
      * @param Profile $profile
-     *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
     public function destroy(Request $request, Profile $profile)
     {
