@@ -132,9 +132,13 @@ class ProfileController extends Controller
     {
         $user = $request->user();
 
-        $profile = $user->profiles()->create(array_merge($request->getValidInput(), [
-            'logo' => $this->uploadLogo($request),
-        ]));
+        $profile = $user->profiles()->create($request->getValidInput());
+        if($request->has('logo')) {
+            $profile->addMediaFromRequest('logo')
+                ->setName("$profile->slug avatar")
+                ->setFileName($profile->slug . ".png")
+                ->toMediaCollection('avatars');
+        }
 
         if ($user->profiles()->count() === 1) {
             $user->profiles()->updateExistingPivot($profile->id, [
