@@ -22,6 +22,7 @@
 
 @section('scripts')
     {!! Mapper::renderJavascript() !!}
+
     <script type="text/javascript">
         $(function(){
             $(window).bind("load resize", function(){

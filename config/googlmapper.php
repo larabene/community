@@ -24,13 +24,23 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Google API version
+    |--------------------------------------------------------------------------
+    |
+    | A Google API version to use with Googlmapper.
+    |
+    */
+    'version' => env('GOOGLE_API_VERSION', 'quarterly'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Region
     |--------------------------------------------------------------------------
     |
     | The region Google API should use required in ISO 3166-1 code format.
     |
     */
-    'region' => 'NL',
+    'region' => 'GB',
 
     /*
     |--------------------------------------------------------------------------
@@ -40,7 +50,7 @@ return [
     | The Language Google API should use required in ISO 639-1 code format.
     |
     */
-    'language' => 'nl',
+    'language' => 'en-gb',
 
     /*
     |--------------------------------------------------------------------------
@@ -51,16 +61,6 @@ return [
     |
     */
     'async' => false,
-
-    /*
-    |--------------------------------------------------------------------------
-    | User Custom Maps
-    |--------------------------------------------------------------------------
-    |
-    | Automatically add the logged in Google user to Googlmapper displayed map.
-    |
-    */
-    'user' => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -103,7 +103,7 @@ return [
     | The default zoom level Googlmapper should use.
     |
     */
-    'zoom' => 7,
+    'zoom' => 8,
 
     /*
     |--------------------------------------------------------------------------
@@ -255,7 +255,7 @@ return [
         | Display custom images for clusters using icon path. (Link to an image path)
         |
         */
-        'icon' => '//googlemaps.github.io/js-marker-clusterer/images/m',
+        'icon' => '//googlearchive.github.io/js-marker-clusterer/images/m',
 
         /*
         |--------------------------------------------------------------------------
@@ -297,7 +297,7 @@ return [
         | hidden and a count is shown.
         |
         */
-        'size' => 2,
+        'size' => 2
 
     ],
 

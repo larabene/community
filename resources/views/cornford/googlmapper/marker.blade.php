@@ -1,4 +1,4 @@
-@if ($options['user'] && $options['place'])
+@if ($options['place'])
 
 	var service = new google.maps.places.PlacesService({!! $options['map'] !!});
 	var request = {
@@ -13,11 +13,19 @@
 
 @endif
 
+@if ($options['locate'] && $options['marker'])
+	if (typeof navigator !== 'undefined' && navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(function (position) {
+			marker_0.setPosition(new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
+		});
+	}
+@endif
+
 var markerPosition_{!! $id !!} = new google.maps.LatLng({!! $options['latitude'] !!}, {!! $options['longitude'] !!});
 
 var marker_{!! $id !!} = new google.maps.Marker({
 	position: markerPosition_{!! $id !!},
-	@if ($options['user'] && $options['place'])
+	@if ($options['place'])
 		place: {
 			placeId: '{!! $options['place'] !!}',
 			location: { lat: {!! $options['latitude'] !!}, lng: {!! $options['longitude'] !!} }
@@ -29,11 +37,11 @@ var marker_{!! $id !!} = new google.maps.Marker({
 	@endif
 		
 	@if (isset($options['draggable']) && $options['draggable'] == true)
-		draggable:true,
+		draggable: true,
 	@endif
 	
 	title: {!! json_encode((string) $options['title']) !!},
-	label: {!! json_encode((string) $options['label']) !!},
+	label: {!! json_encode($options['label']) !!},
 	animation: @if (empty($options['animation']) || $options['animation'] == 'NONE') '' @else google.maps.Animation.{!! $options['animation'] !!} @endif,
 	@if ($options['symbol'])
 		icon: {
@@ -41,7 +49,22 @@ var marker_{!! $id !!} = new google.maps.Marker({
 			scale: {!! $options['scale'] !!}
 		}
 	@else
-		icon: {!! json_encode((is_array($options['icon']) ? (array) $options['icon'] : (string) $options['icon'])) !!}
+		icon:
+		@if (is_array($options['icon']) && isset($options['icon']['url']))
+			{
+				url: {!! json_encode((string) $options['icon']['url']) !!},
+
+				@if (isset($options['icon']['size']))
+					@if (is_array($options['icon']['size']))
+						scaledSize: new google.maps.Size({!! $options['icon']['size'][0] !!}, {!! $options['icon']['size'][1] !!})
+					@else
+						scaledSize: new google.maps.Size({!! $options['icon']['size'] !!}, {!! $options['icon']['size'] !!})
+					@endif
+				@endif
+			}
+		@else
+			{!! json_encode($options['icon']) !!}
+		@endif
 	@endif
 });
 
@@ -50,7 +73,7 @@ bounds.extend(marker_{!! $id !!}.position);
 marker_{!! $id !!}.setMap({!! $options['map'] !!});
 markers.push(marker_{!! $id !!});
 
-@if ($options['user'] && $options['place'])
+@if ($options['place'])
 
 		marker_{!! $id !!}.addListener('click', function() {
 			infowindow.setContent('<a href="' + placeResult.website + '">' + placeResult.name + '</a>');
@@ -97,7 +120,7 @@ markers.push(marker_{!! $id !!});
 
 @endif
 
-@foreach (['eventClick', 'eventRightClick', 'eventMouseOver', 'eventMouseDown', 'eventMouseUp', 'eventMouseOut', 'eventDrag', 'eventDragStart', 'eventDragEnd', 'eventDomReady'] as $event)
+@foreach (['eventClick', 'eventDblClick', 'eventRightClick', 'eventMouseOver', 'eventMouseDown', 'eventMouseUp', 'eventMouseOut', 'eventDrag', 'eventDragStart', 'eventDragEnd', 'eventDomReady'] as $event)
 
 	@if (isset($options[$event]))
 
