@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use App\Rules\Latitude;
 use App\Rules\Longitude;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use SebastiaanLuca\Validator\Validators\Validator;
 
 class ProfileRequest extends Validator
